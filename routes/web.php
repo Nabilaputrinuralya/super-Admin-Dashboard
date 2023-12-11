@@ -16,12 +16,9 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\PortalLoginController;
 use App\Http\Controllers\ProjectPageController;
 use App\Http\Controllers\UserManagementController;
-use App\Http\Controllers\LoginDestinationController;
 use App\Http\Controllers\ProjectManagementController;
 use App\Http\Controllers\ContactUsSendMessageController;
 
@@ -90,12 +87,12 @@ Route::post('update-profile-info',[UserController::class,'updateInfo'])->name('u
 });
 
 /*PROJECTS*/
-Route::get('/dataourproject',[ProjectPageController::class, 'index'])->name('dataourproject');
+Route::get('/dataproject',[ProjectPageController::class, 'index'])->name('dataproject');
 Route::get('/createproject',[ProjectPageController::class, 'create'])->name('createproject');
 Route::post('/simpanproject',[ProjectPageController::class, 'store'])->name('simpanproject');
 Route::get('/editproject/{id}',[ProjectPageController::class, 'edit'])->name('editproject');
-Route::post('/updateproject/{id}',[ProjectPageController::class, 'update'])->name('updateproject');
-Route::delete('/deleteproject/{id}', [ProjectPageController::class, 'destroy'])->name('deleteproject');
+Route::post('/udpateproject/{id}',[ProjectPageController::class, 'update'])->name('udpateproject');
+Route::get('/deleteproject/{id}',[ProjectPageController::class, 'destroy'])->name('deleteproject');
 Route::get('/showproject/{id}',[ProjectPageController::class, 'show'])->name('showproject');
 
 /*NAVBAR*/
@@ -127,7 +124,7 @@ Route::get('/createaboutteam',[AboutController::class, 'createaboutteam'])->name
 Route::post('/simpanaboutteam',[AboutController::class, 'storeaboutteam'])->name('simpanaboutteam');
 Route::get('/editaboutteam/{id}',[AboutController::class, 'editaboutteam'])->name('editaboutteam');
 Route::post('/updateaboutteam/{id}',[AboutController::class, 'updateaboutteam'])->name('updateaboutteam');
-Route::delete('/deleteaboutteam/{id}', [AboutController::class, 'destroyaboutteam'])->name('deleteaboutteam');
+Route::get('/deleteaboutteam/{id}',[AboutController::class, 'destroyaboutteam'])->name('deleteaboutteam');
                                                                                                                                                                                                                                                                                                                                                                   
 Route::get('/dataabout',[AboutController::class, 'index'])->name('dataabout');
 Route::get('/createaboutdescription',[AboutController::class, 'createabboutdescription'])->name('createaboutdescription');
@@ -166,20 +163,23 @@ Route::get('add',[StudentController::class, 'index']);
 Route::post('save',[StudentController::class, 'save'])->name('student.save');
 
 /*PROJECT MANAGEMENT*/
-Route::get('/dataprojectmanagement',[ProjectManagementController::class, 'index'])->name('dataprojectmanagement');
-Route::get('/createprojectmanagement',[ProjectManagementController::class, 'create'])->name('createprojectmanagement');
-Route::post('/simpanprojectmanagement',[ProjectManagementController::class, 'store'])->name('simpanprojectmanagement');
-Route::get('/editprojectmanagement/{id}',[ProjectManagementController::class, 'edit'])->name('editprojectmanagement');
-Route::post('/updateprojectmanagement',[ProjectManagementController::class, 'update'])->name('updateprojectmanagement');
-Route::delete('/deleteprojectmanagement/{id}', [ProjectManagementController::class, 'destroy'])->name('deleteprojectmanagement');
-// Route::get('/showpms/{id}',[ProjectManagementController::class, 'show'])->name('showpms');
+Route::get('/datapms',[ProjectManagementController::class, 'index'])->name('datapms');
+Route::get('/createpms',[ProjectManagementController::class, 'create'])->name('createpms');
+Route::get('/createdashboardpms', [ProjectManagementController::class, 'createDashboard'])->name('createdashboardpms');
+Route::post('/createdashboardpms', [ProjectManagementController::class, 'storeDashboard'])->name('storedashboardpms');
+Route::post('/simpanpms',[ProjectManagementController::class, 'store'])->name('simpanpms');
+Route::get('/editpms/{id}',[ProjectManagementController::class, 'edit'])->name('editpms');
+Route::post('/updatepms/{id}',[ProjectManagementController::class, 'update'])->name('updatepms');
+Route::get('/deletepms/{id}',[ProjectManagementController::class, 'destroy'])->name('deletepms');
+Route::get('/showpms/{id}',[ProjectManagementController::class, 'show'])->name('showpms');
 
 /*MESSAGE*/
 Route::get('/datamessage',[MessageController::class, 'index'])->name('datamessage');
 Route::get('/createmessage',[MessageController::class, 'create'])->name('createmessage');
+Route::post('/simpanmessage',[MessageController::class, 'store'])->name('simpanmessage');
 Route::get('/editmessage/{id}',[MessageController::class, 'edit'])->name('editmessage');
 Route::post('/updatemessage/{id}',[MessageController::class, 'update'])->name('updatemessage');
-Route::delete('/deletemessage/{id}', [MessageController::class, 'destroy'])->name('deletemessage');
+Route::get('/deletemessage/{id}',[MessageController::class, 'destroy'])->name('deletemessage');
 Route::get('/showmessage/{id}',[MessageController::class, 'show'])->name('showmessage');
 Route::get('/change-status/{id}',[MessageController::class, 'changeStatus'])->name('changestatus');
 
@@ -187,7 +187,6 @@ Route::get('/landingpage',[LandingPageController::class, 'index'])->name('landin
 Route::get('/copyrightpage',[LandingPageController::class, 'copyrightpage'])->name('copyrightpage');
 Route::get('/privacypolicypage',[LandingPageController::class, 'privacypolicypage'])->name('privacypolicypage');
 Route::get('/termsofusepage',[LandingPageController::class, 'termsofusepage'])->name('termsofusepage');
-Route::get('/projectdetails',[LandingPageController::class, 'projectdetail'])->name('projectdetails');
 // Route::post('/store-form', [LandingPageController::class, 'store']);
 // Route::post('/dashboard', [LandingPageController::class, 'dashboard']);
 
@@ -209,9 +208,10 @@ Route::post('/mahasiswa/store',[MahasiswaController::class, 'store']);
 // Route::get('/change-status/{id}',[MessageController::class, 'changeStatus'])->name('changestatus');
 
 
-// Route::get('add-blog-post-form', [MessageController::class, 'index']);
-// // Route::get('dashboard', [MessageController::class, 'dashboard']);
-// Route::post('store-form', [MessageController::class, 'store']);
+Route::get('add-blog-post-form', [MessageController::class, 'index']);
+// Route::get('dashboard', [MessageController::class, 'dashboard']);
+Route::post('store-form', [MessageController::class, 'store']);
+Route::get('/deletemessage/{id}',[MessageController::class, 'destroy'])->name('deletemessage');
 
 /*USER MANAGEMENT*/
 Route::get('/datausermanagement',[UserManagementController::class, 'index'])->name('datausermanagement');
@@ -220,16 +220,3 @@ Route::post('/simpanusermanagement',[UserManagementController::class, 'store'])-
 Route::get('/editusermanagement/{id}',[UserManagementController::class, 'edit'])->name('editusermanagement');
 Route::post('/updateusermanagement/{id}',[UserManagementController::class, 'update'])->name('updateusermanagement');
 Route::get('/deleteusermanagement/{id}',[UserManagementController::class, 'destroy'])->name('deleteusermanagement');
-
-
-/*PORTAL LOGIN*/
-Route::get('/dataportallogin',[PortalLoginController::class, 'index'])->name('dataportallogin');
-Route::get('/createportallogin',[PortalLoginController::class, 'create'])->name('createportallogin');
-Route::post('/simpanportallogin',[PortalLoginController::class, 'store'])->name('simpanportallogin');
-Route::get('/editportallogin/{id}',[PortalLoginController::class, 'edit'])->name('editportallogin');
-Route::post('/updateportallogin/{id}',[PortalLoginController::class, 'update'])->name('updateportallogin');
-Route::delete('/deleteportallogin/{id}', [PortalLoginController::class, 'destroy'])->name('deleteportallogin');
-
-
-Route::get('/logindestination',[LoginDestinationController::class, 'index'])->name('logindestination');
-

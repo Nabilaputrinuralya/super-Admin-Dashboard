@@ -52,7 +52,7 @@ class NavbarController extends Controller
         $nm->move(public_path().'/navbarimg', $namaFile);
         $dtUpload->save();
 
-        return redirect('datanavbar')->with('success', 'Data Changed Successfully!');
+        return redirect('datanavbar')->with('success', 'Data Berhasil Tersimpan!');
 
 
     }
@@ -83,14 +83,6 @@ class NavbarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Validasi form untuk file gambar
-        $request->validate([
-            'websitelogo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ], [
-            'websitelogo.image' => 'The file must be an image.',
-            'websitelogo.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-        ]);
-
         $ubah = Navbar::findorfail($id);
         $awal = $ubah->websitelogo;
 
@@ -100,7 +92,7 @@ class NavbarController extends Controller
         ];
         $request->websitelogo->move(public_path().'/navbarimg', $awal);
         $ubah->update($dt);
-        return redirect('datanavbar')->with('success', 'Data Updated Successfully!');
+        return redirect('datanavbar')->with('success', 'Data Berhasil Di update!');
         
     }
 
@@ -119,7 +111,7 @@ class NavbarController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data Deleted Successfully');
+        return back()->with('info','Data berhasil dihapus');
 
     }
     

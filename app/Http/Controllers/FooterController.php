@@ -49,7 +49,7 @@ class FooterController extends Controller
         $nm->move(public_path().'/footerimg', $namaFile);
         $dtUpload->save();
 
-        return redirect('datafooter')->with('success', 'Data Changed Successfully!');
+        return redirect('datafooter')->with('success', 'Data Berhasil Tersimpan!');
 
 
     }
@@ -81,45 +81,21 @@ class FooterController extends Controller
     public function update(Request $request, string $id)
     {
         $ubah = Footer::findorfail($id);
+        $awal = $ubah->websitelogo;
 
-        // Memeriksa apakah ada file gambar yang diunggah
-        if ($request->hasFile('websitelogo')) {
-            // Validasi form untuk file gambar
-            $request->validate([
-                'websitelogo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ], [
-                'websitelogo.image' => 'The file must be an image.',
-                'websitelogo.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-            ]);
-    
-            // Proses penyimpanan file gambar
-            $nm = $request->websitelogo;
-            $namaFile = $nm->getClientOriginalName();
-            $nm->move(public_path().'/footerimg ', $namaFile);
-    
-            // Update data dengan file gambar baru
-            $dt = [
-                'locationaddress' => $request['locationaddress'],
-                'copyrightpage' => $request['copyrightpage'],
-                'privacypolicypage' => $request['copyrightpage'],
-                'termofusepage' => $request['termofusepage'],
-                'copyright' => $request['copyright'],
-                'websitelogo' => $namaFile,
-            ];
-        } else {
-            // Update data tanpa mengubah file gambar
-            $dt = [
-                'locationaddress' => $request['locationaddress'],
-                'copyrightpage' => $request['copyrightpage'],
-                'privacypolicypage' => $request['copyrightpage'],
-                'termofusepage' => $request['termofusepage'],
-                'copyright' => $request['copyright'],
-                
-            ];
-        }
-    
+        $dt = [
+            'locationaddress' => $request['locationaddress'],
+            'copyrightpage' => $request['copyrightpage'],
+            'privacypolicypage' => $request['privacypolicypage'],
+            'termsofusepage' => $request['termsofusepage'],
+            'copyright' => $request['copyright'],
+            'websiteimage' => $awal,
+
+        ];
+        $request->websitelogo->move(public_path().'/footerimg', $awal);
         $ubah->update($dt);
-        return redirect('datafooter')->with('success', 'Data Updated Successfully!');
+        return redirect('datafooter')->with('success', 'Data Berhasil Di update!');
+        
     }
 
     /**
@@ -137,7 +113,7 @@ class FooterController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data Deleted Successfully');
+        return back()->with('info','Data berhasil dihapus');
 
     }
     

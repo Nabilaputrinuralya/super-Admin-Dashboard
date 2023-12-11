@@ -47,10 +47,11 @@
                       </td>
                              <td>{{ $item->greetingsword }}</td>
                              <td>{{ $item->websitedescription }}</td>
+                            
                              <td>
                                {{-- <a href="{{ url('showmessage',$item->id) }}" class="btn btn-secondary">Show</a> --}}
                                <a href="{{ url('edithome',$item->id) }}" class="btn btn-primary">
-                              <i class="fas fa-edit"></i>Edit
+                                <i class="fas fa-edit"></i>Edit</i>
                               </a>
                                {{-- <a href="{{ url('deletehome',$item->id) }}" class="btn btn-danger">Delete</a> --}}
                              </td>    

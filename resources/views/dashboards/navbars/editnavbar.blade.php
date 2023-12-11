@@ -32,20 +32,13 @@
                      <div class="form-group">
                       <label for="exampleInputEmail1" class="form-label">Website Logo</label>
                       <input type="file" id="websitelogo" name="websitelogo" class="form-control" value="{{ $dt->websitelogo }}">
-                      @error('websitelogo')
-                        <span class="text-danger">{{ $message }}</span>
-                      @enderror
                      </div>
                  <div class="form-group">
                     <img class= "table-active" src="{{asset('navbarimg/'.$dt->websitelogo)}}" width="300px" alt="" srcset="">
                  </div>
                  <div class="form-group">
-                  <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> Changes Data
-                  </button>
-                  <a href="{{ url('datanavbar') }}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Back
-                  </a>
+                  <button type="submit" class="btn btn-success">Ubah data</button>
+                 </div>
                           </div>
                         </form>
                       </div>

@@ -64,7 +64,9 @@ class HomeController extends Controller
             $message->websiteimage = $request->file('websiteimage')->getClientOriginalName();
             $message->save();
         }
-        return redirect('datahome')->with('success', 'Data Changed Successfully!');
+
+       
+        return redirect('datahome');
 
 
     }
@@ -94,53 +96,35 @@ class HomeController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    // Validasi form untuk file gambar
-    $request->validate([
-        'websitelogo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'websiteimage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ], [
-        'websitelogo.image' => 'The file must be an image.',
-        'websitelogo.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-        'websiteimage.image' => 'The file must be an image.',
-        'websiteimage.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-    ]);
-
-
-    $this->validate($request, [
-        'greetingsword' => 'required',
-        'websitedescription' => 'required',
-    ]);
-
-    $message = Home::find($id);
-    $message->greetingsword = $request->greetingsword;
-    $message->websitedescription = $request->websitedescription;
-
-    // Check if a new logo file is uploaded
-    if ($request->hasFile('websitelogo')) {
-        $request->validate([
+    {
+        $this->validate($request,[
             'websitelogo' => 'required',
-        ]);
-
-        $request->file('websitelogo')->move('homeimg/', $request->file('websitelogo')->getClientOriginalName());
-        $message->websitelogo = $request->file('websitelogo')->getClientOriginalName();
-    }
-
-    // Check if a new image file is uploaded
-    if ($request->hasFile('websiteimage')) {
-        $request->validate([
             'websiteimage' => 'required',
+            'greetingsword' => 'required',
+            'websitedescription' => 'required',
         ]);
+        $message = Home::find($id);
+        $message->websitelogo = $request->websitelogo;
+        $message->websiteimage = $request->websiteimage;
+        $message->greetingsword = $request->greetingsword;
+        $message->websitedescription = $request->websitedescription;
+        // $message = message::create($request->all());
+        if($request->hasFile('websitelogo')) {
+            $request->file('websitelogo')->move('homeimg/',$request->file('websitelogo')->getClientOriginalName());
+            $message->websitelogo = $request->file('websitelogo')->getClientOriginalName();
+            // $message->save();
+        }
+        if($request->hasFile('websiteimage')) {
+            $request->file('websiteimage')->move('homeimg/',$request->file('websiteimage')->getClientOriginalName());
+            $message->websiteimage = $request->file('websiteimage')->getClientOriginalName();
+            // $message->save();
+        }
+        $message->save();
 
-        $request->file('websiteimage')->move('homeimg/', $request->file('websiteimage')->getClientOriginalName());
-        $message->websiteimage = $request->file('websiteimage')->getClientOriginalName();
+        return redirect('/datahome');
+        
+        
     }
-
-    $message->save();
-
-    return redirect('datahome')->with('success', 'Data Updated Successfully!');
-}
-
 
     /**
      * Remove the specified resource from storage.
@@ -151,8 +135,7 @@ class HomeController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data Deleted Successfully');
-
+        return back()->with('info','Data berhasil dihapus');
 
     }
 

@@ -21,17 +21,13 @@
         <div class="">
         <div class=" card card-info card-outline">
             <div class="card-header">
-              <a href="{{ route('createproject') }}" class="btn btn-success mt-2 mb-3 justify-content-between">
-                <span>Add New Project</span>
-                <i class="fas fa-plus-circle"></i>
-              </a>
+                <a href="{{ route('createproject') }}" class="btn btn-success  mt-2 mb-3 ">Tambah <i class="fas fa-plus-square"></i></a>
                       <table id="myDataTable1" class="table table-bordered tbale-hover">
                       <thead>
                       <tr>
                       <th>No</th>
                       <th>Project Name</th>
                       <th>Project Description</th>
-                      {{-- <th>Project Detail</th> --}}
                       <th>Project Image</th>
                       <th>Actions</th>
                     </tr>
@@ -45,21 +41,14 @@
                             <th scope="item">{{ $no++}}</th>
                             <td>{{ $item->projectname }}</td>
                             <td>{{ $item->projectdescription }}</td>
-                            {{-- <td>{{ $item->projectdetails }}</td> --}}
                             <td>
                                 <img src="{{asset('projectimg/'.$item->projectimage)}}" width="200px" alt="" srcset="">
                             </td>
                             <td>
                               {{-- <a href="{{ url('showproject',$item->id) }}" class="btn btn-secondary">Show</a> --}}
-                            <a href="{{ url('editproject',$item->id) }}" class="btn btn-primary mb-2">
-                             <i class="fas fa-edit"></i>&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;</i>
-                           </a>
-                           {{-- <br/>
-                           <br/> --}}
-                           <a href="{{ url('deleteproject',$item->id) }}" class="btn btn-danger" data-confirm-delete="true">
-                            <i class="fas fa-trash-alt"></i>&nbsp;Delete
-                          </a>
-                           </td>      
+                              <a href="{{ url('editproject',$item->id) }}" class="btn btn-primary">Edit</a>
+                              <a href="{{ url('deleteproject',$item->id) }}" class="btn btn-danger">Delete</a>
+                            </td>    
                         </tr>
                         @endforeach
                   </tbody>

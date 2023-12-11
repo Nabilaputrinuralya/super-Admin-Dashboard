@@ -75,7 +75,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <li class="scroll-to-section"><a href="#projectspage">Projects</a></li>
               <li class="scroll-to-section"><a href="#contactuspage">Contact Us</a></li>
             </ul>
-            <a href="http://127.0.0.1:8000/logindestination" class="action_btn" id="form-open">LOGIN</a>    
+            <a href="http://127.0.0.1:8000/login" class="action_btn" id="form-open">LOGIN</a>    
             <a class='menu-trigger'>
                 <span>Menu</span>
             </a>
@@ -236,7 +236,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <img src="{{asset('projectimg/'.$item->projectimage)}}"  class="card-img-top" alt="Project Image 1" srcset="">
               <div class="card-body">
                 <h4 class="card-title"><a href="#">{{ $item->projectname }}</a></h4>
-                {{-- <a href="{{ route('projectdetails') }}" class="action_btn">DETAILS</a> --}}
+                <button class="action_btn">DETAILS</button>
               </div>
               <p class="card-text">{{ $item->projectdescription }}</p>
             </div>
@@ -324,24 +324,12 @@ https://templatemo.com/tm-570-chain-app-dev
                 <span>Phone</span>
               </div>
               <div class="select-menu">
-                <div class="select-btn">
-                  <span class="sBtn-text">Subject</span>
-                  <i class="bx bx-chevron-down"></i>
-                </div>
-                <ul class="options">
-                  <li class="option">
-                    <input type="radio" class="radio" id="feedback" name="subject" value="Feedback" required>
-                    <label for="feedback" class="option-text">Feedback</label>
-                  </li>
-                  <li class="option">
-                    <input type="radio" class="radio" id="website-issue" name="subject" value="Website Issue(s)" required>
-                    <label for="website-issue" class="option-text">Website Issue(s)</label>
-                  </li>
-                  <li class="option">
-                    <input type="radio" class="radio" id="general-question" name="subject" value="General Question(s)" required>
-                    <label for="general-question" class="option-text">General Question(s)</label>
-                  </li>
-                </ul>
+                <select class="select-btn" name="subject">
+                  <option class="option-text" value="" disabled selected hidden>Subject</option>
+                  <option value="Feedback">Feedback</option>
+                  <option value="Website Issue(s)">Website Issue(s)</option>
+                  <option value="General Question(s)">General Question(s)</option>
+                </select>
               </div>
               <div class="input-container textarea">
                 <textarea name="message" class="input"></textarea>
@@ -400,7 +388,7 @@ https://templatemo.com/tm-570-chain-app-dev
 
 
   <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -415,26 +403,5 @@ https://templatemo.com/tm-570-chain-app-dev
   <script src="{{ asset('assets/js/contact-us.js') }}"></script>
   <script src="{{ asset('assets/js/contact-form.js') }}"></script>
   <script src="{{ asset('assets/js/login.js') }}"></script>
-
-  <script>
-    $(document).ready(function() {
-      $('.select-btn').click(function() {
-        $('.options').toggleClass('active');
-      });
-  
-      $('.option').click(function() {
-        var selectedOption = $(this).text();
-        $('.sBtn-text').text(selectedOption);
-        $('.options').removeClass('active');
-      });
-  
-      $(document).on('click', function(e) {
-        if (!$(e.target).closest('.select-menu').length) {
-          $('.options').removeClass('active');
-        }
-      });
-    });
-  </script>
-  
 </body>
 </html>

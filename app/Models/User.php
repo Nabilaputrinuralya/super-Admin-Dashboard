@@ -55,10 +55,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'role',
-        'phone',
-        'picture',
         'password',
+        'telp',
+        'role',
+        'image',
+        'last_seen',
     ];
 
     /**
@@ -81,11 +82,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getPictureAttribute($value){
-        if($value){
-            return asset('users/images/'.$value);
-        }else{
-            return asset('users/images/no-image.png');
-        }
-    }
+    // public function getPictureAttribute($value){
+    //     if($value){
+    //         return asset('users/images/'.$value);
+    //     }else{
+    //         return asset('users/images/no-image.png');
+    //     }
+    // }
 }

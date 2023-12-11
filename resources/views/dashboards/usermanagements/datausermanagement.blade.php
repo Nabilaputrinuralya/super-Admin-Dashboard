@@ -22,7 +22,7 @@
           <div class="">
           <div class=" card card-info card-outline">
               <div class="card-header">
-          <a href="{{ route('createusermanagement') }}" class="btn btn-success  mt-2 mb-3 ">Add New Member&nbsp;<i class="fas fa-user-plus"></i></a>
+                  <a href="{{ route('createusermanagement') }}" class="btn btn-success  mt-2 mb-3 ">Tambah <i class="fas fa-plus-square"></i></a>
                         <table id="myDataTable1" class="table table-bordered tbale-hover">
                         <thead>
                         <tr>
@@ -53,12 +53,8 @@
                               </td>
                               <td>
                                 {{-- <a href="{{ url('showproject',$item->id) }}" class="btn btn-secondary">Show</a> --}}
-                                <a href="{{ url('editusermanagement',$item->id) }}" class="btn btn-primary mb-2">
-                                  <i class="fas fa-edit"></i>&nbsp;Edit</i>
-                                </a>
-                                <a href="{{ url('deleteusermanagement',$item->id) }}" class="btn btn-danger">
-                                  <i class="fas fa-trash-alt"></i>&nbsp;Delete</i>
-                                </a>
+                                <a href="{{ url('editusermanagement',$item->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url('deleteusermanagement',$item->id) }}" class="btn btn-danger">Delete</a>
                               </td>    
                           </tr>
                           @endforeach

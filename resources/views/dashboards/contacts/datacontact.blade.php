@@ -67,9 +67,7 @@
                             <td>{{ $item->linkedinlink }}</td>
                             <td>
                               {{-- <a href="{{ url('showproject',$item->id) }}" class="btn btn-secondary">Show</a> --}}
-                              <a href="{{ url('editcontactcard1',$item->id) }}" class="btn btn-primary">
-                                <i class="fas fa-edit"></i>&nbsp;Edit</i>
-                              </a>
+                              <a href="{{ url('editcontactcard1',$item->id) }}" class="btn btn-primary">Edit</a>
                               {{-- <a href="{{ url('deletecontactcard1',$item->id) }}" class="btn btn-danger">Delete</a> --}}
                             </td>    
                         </tr>
@@ -102,9 +100,7 @@
                       <td>{{ $item->carddescription }}</td>
                       <td>
                         {{-- <a href="{{ url('showproject',$item->id) }}" class="btn btn-secondary">Show</a> --}}
-                        <a href="{{ url('editcontactcard2',$item->id) }}" class="btn btn-primary">
-                          <i class="fas fa-edit"></i>&nbsp;Edit</i>
-                        </a>
+                        <a href="{{ url('editcontactcard2',$item->id) }}" class="btn btn-primary">Edit</a>
                         {{-- <a href="{{ url('deletecontactcard2',$item->id) }}" class="btn btn-danger">Delete</a> --}}
                       </td>    
                   </tr>

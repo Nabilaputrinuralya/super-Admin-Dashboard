@@ -10,12 +10,7 @@ class MessageController extends Controller
     public function index()
     {
         $post = Message::all();
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
         return view('dashboards.messages.datamessage',compact('post'));
-
-        
     }
     public function store(Request $request)
     {
@@ -55,7 +50,7 @@ class MessageController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data Deleted Successfully');
+        return back()->with('info','Data berhasil dihapus');
 
     }
 

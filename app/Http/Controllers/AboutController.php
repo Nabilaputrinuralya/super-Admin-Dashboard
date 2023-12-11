@@ -20,8 +20,6 @@ class AboutController extends Controller
     {
         $dataAboutDescription = AboutDescription::all();
         $dataAboutTeam = AboutTeam::all();
-        $title = 'Delete User!';$text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
         return view('dashboards.abouts.dataabout',compact('dataAboutDescription','dataAboutTeam'));
     }
 
@@ -55,7 +53,7 @@ class AboutController extends Controller
 
         $dtUpload->save();
 
-        return redirect('dataabout')->with('success', 'Data Changed Successfully!');
+        return redirect('dataabout')->with('success', 'Data Berhasil Tersimpan!');
 
 
     }
@@ -65,28 +63,11 @@ class AboutController extends Controller
      */
     public function storeaboutteam(Request $request)
     {
-        // Validasi form
-        $request->validate([
-            'fullname' => 'required',
-            'jobposition' => 'required',
-            'instagramlink' => 'required',
-            'linkedinlink' => 'required',
-            'profilepicture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ], [
-            'fullname.required' => 'The fullname field is required',
-            'jobposition.required' => 'The job positon field is required',
-            'instagramlink.required' => 'Instagram link is required.',
-            'linkedinlink.required' => 'Linkedin link is required.',
-            'profilepicture.required' => 'Profile picture must be uploaded.',
-            'profilepicture.image' => 'The file must be an image.',
-            'profilepicture.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-        ]);
-
-        // Logika penyimpanan data jika validasi berhasil
         $nm = $request->profilepicture;
         $namaFile = $nm->getClientOriginalName();
 
         $dtUpload = new AboutTeam;
+        
         $dtUpload->profilepicture = $namaFile;
         $dtUpload->fullname = $request->fullname;
         $dtUpload->jobposition = $request->jobposition;
@@ -96,7 +77,9 @@ class AboutController extends Controller
         $nm->move(public_path().'/aboutimg', $namaFile);
         $dtUpload->save();
 
-        return redirect('dataabout')->with('success', 'Data Changed Successfully!');
+        return redirect('dataabout')->with('success', 'Data Berhasil Tersimpan!');
+
+
     }
 
     /**
@@ -141,7 +124,7 @@ class AboutController extends Controller
             
         ];
         $ubah->update($dt);
-       return redirect('dataabout')->with('success', 'Data Updated Successfully!');
+        return redirect('dataabout')->with('success', 'Data Berhasil Di update!');
         
     }
 
@@ -151,42 +134,20 @@ class AboutController extends Controller
     public function updateaboutteam(Request $request, string $id)
     {
         $ubah = AboutTeam::findorfail($id);
+        $awal = $ubah->profilepicture;
 
-        // Memeriksa apakah ada file gambar yang diunggah
-        if ($request->hasFile('profilepicture')) {
-            // Validasi form untuk file gambar
-            $request->validate([
-                'profilepicture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ], [
-                'profilepicture.image' => 'The file must be an image.',
-                'profilepicture.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-            ]);
-    
-            // Proses penyimpanan file gambar
-            $nm = $request->profilepicture;
-            $namaFile = $nm->getClientOriginalName();
-            $nm->move(public_path().'/aboutimg', $namaFile);
-    
-            // Update data dengan file gambar baru
-            $dt = [
-                'fullname' => $request['fullname'],
-                'jobposition' => $request['jobposition'],
-                'instagramlink' => $request['instagramlink'],
-                'linkedinlink' => $request['linkedinlink'],
-                'profilepicture' => $namaFile,
-            ];
-        } else {
-            // Update data tanpa mengubah file gambar
-            $dt = [
-                'fullname' => $request['fullname'],
-                'jobposition' => $request['jobposition'],
-                'instagramlink' => $request['instagramlink'],
-                'linkedinlink' => $request['linkedinlink'],
-            ];
-        }
-    
+        $dt = [
+            'fullname' => $request['fullname'],
+            'jobposition' => $request['jobposition'],
+            'instagramlink' => $request['instagramlink'],
+            'linkedinlink' => $request['linkedinlink'],
+            'profilepicture' => $awal,
+
+        ];
+        $request->profilepicture->move(public_path().'/aboutimg', $awal);
         $ubah->update($dt);
-        return redirect('dataabout')->with('success', 'Data Updated Successfully!');
+        return redirect('dataabout')->with('success', 'Data Berhasil Di update!');
+        
     }
 
 
@@ -199,7 +160,7 @@ class AboutController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data Deleted Successfully');
+        return back()->with('info','Data berhasil dihapus');
 
     }
     
@@ -218,7 +179,8 @@ class AboutController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data Deleted Successfully');
+        return back()->with('info','Data berhasil dihapus');
+
     }
     
 

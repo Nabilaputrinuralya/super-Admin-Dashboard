@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
-use App\Models\UserManagement;
 use App\Models\ProjectManagement;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class ProjectManagementController extends Controller
 {
@@ -20,10 +22,7 @@ class ProjectManagementController extends Controller
     public function index(Request $request)
     {
         $dataPms = ProjectManagement::all();
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-        return view('dashboards.projectmanagements.dataprojectmanagement',compact('dataPms'));
+        return view('dashboards.projectmanagements.dataprojectmanagement',compact('dataPms'))->with('success, project created successfully');
     }
 
     /**
@@ -39,35 +38,54 @@ class ProjectManagementController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi form
-        $request->validate([
-            'projectname' => 'required',
-            'projectuser' => 'required',
-            'projectdeadline' => 'required',
-            
-        ], [
-            'projectname.required' => 'The project name field is required.',
-            'projectuser.required' => 'The project user field is required.',
-            'projectdeadline.required' => 'The project deadline field is required.',
+        $projectname = $request->projectname;
+        $projectuser = $request->projectuser;
+        $projectdeadline = $request->projectdeadline;
+        $project_id = Helper::IDGenerator(new ProjectManagement, 'project_id', 5, 'VQTQ');
+
+        // $q = new ProjectManagement;
+        // $q->project_id = $project_id;
+        // $q->projectname = $projectname;
+        // $q->projectuser = $projectuser;
+        // $q->projectdeadline = $projectdeadline;
+        // $q->save();
+
+        $new_project = DB::table('project_management')->insertGetId([
+            'project_id' => $project_id,
+            'projectname' => $projectname,
+            'projectuser' => $projectuser,
+            'projectdeadline' => $projectdeadline,
         ]);
 
-         // Logika untuk membuat ID proyek secara otomatis
-    $project_id = 'PROJ_' . date('YmdHis');
+        if ($new_project) {
+            // clone dashboard
+            $sourceFolder = 'F:/project-laravel/Dashboard/template';
+            $destination = 'F:/project-laravel/Dashboard';
+            $name = $request->input('projectname');
+            $destinationFolder = $destination . '/' . $name;
 
-    $projectname = $request->projectname;
-    $projectuser = $request->projectuser;
-    $projectdeadline = $request->projectdeadline;
+            if (File::isDirectory($sourceFolder)) {
+                // Check if the source folder exists
+                if (!File::isDirectory($destinationFolder)) {
+                    // Create the destination folder if it doesn't exist
+                    File::makeDirectory($destinationFolder, 0755, true); // Change permissions as needed
+    
+                    // Copy the contents recursively
+                    File::copyDirectory($sourceFolder, $destinationFolder);
+    
+                    Session::flash('success', 'Folder "' . $name . '" created successfully!');
+                    return redirect()->route('datapms')->with('success','Project created successfully.');;
+                } else {
+                    Session::flash('error', 'Folder "' . $name . '" already exists!');
+                    return redirect()->route('datapms')->with('error','Folder already exists!');;
+                }
+            } else {
+                Session::flash('error', 'Source folder does not exist!');
+                return redirect()->route('datapms')->with('success','Source folder does not exists!');;
+            }
+        }
 
-    $q = new ProjectManagement;
-    $q->project_id = $project_id;
-    $q->projectname = $projectname;
-    $q->projectuser = $projectuser;
-    $q->projectdeadline = $projectdeadline;
-    $q->save();
-
-    return redirect('dataprojectmanagement')->with('success', 'Data Changed Successfully!');
-
-
+        // return back()->with('success', 'Data Berhasil Tersimpan!');
     }
 
     /**
@@ -106,7 +124,7 @@ class ProjectManagementController extends Controller
 
         ];
         $ubah->update($dt);
-        return redirect('dataprojectmanagement')->with('success', 'Data Updated Successfully!');
+        return redirect('dataprojectmanagement')->with('success', 'Data Berhasil Di update!');
         
     }
 
@@ -119,11 +137,44 @@ class ProjectManagementController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data Deleted Successfully');
+        return back()->with('info','Data berhasil dihapus');
 
     }
-    
 
+    public function createDashboard()
+    {
+        return view('dashboards.projectmanagements.createdashboard');
+    }
+    
+    public function storeDashboard(Request $request)
+    {
+        $sourceFolder = 'F:/project-laravel/Dashboard/template';
+        $destination = 'F:/project-laravel/Dashboard';
+        $name = $request->input('projectname');
+        $destinationFolder = $destination . '/' . $name;
+
+        if (File::isDirectory($sourceFolder)) {
+            // Check if the source folder exists
+            if (!File::isDirectory($destinationFolder)) {
+                // Create the destination folder if it doesn't exist
+                File::makeDirectory($destinationFolder, 0755, true); // Change permissions as needed
+
+                // Copy the contents recursively
+                File::copyDirectory($sourceFolder, $destinationFolder);
+
+                Session::flash('success', 'Folder "' . $destinationFolder . '" created successfully!');
+                return response()->json(['success' => true]);
+                // return response()->alert('Folder cloned successfully');
+            } else {
+                Session::flash('error', 'Folder "' . $destinationFolder . '" already exists!');
+                return response()->json(['success' => false]);
+                // return response()->alert('Destination folder already exists');
+            }
+        } else {
+            Session::flash('error', 'Folder "' . $sourceFolder . '" does not exist!');
+            return response()->json(['success' => false]);
+            // return response()->alert('Source folder does not exist');
+        }
+    }
 
 }
-

@@ -18,9 +18,6 @@ class ProjectPageController extends Controller
     public function index(Request $request)
     {
         $dataProject = ProjectPage::all();
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
         return view('dashboards.projects.dataproject',compact('dataProject'));
     }
 
@@ -37,22 +34,6 @@ class ProjectPageController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi form
-        $request->validate([
-            'projectname' => 'required',
-            'projectdescription' => 'required',
-            // 'projectdetails' => 'required',
-            'projectimage' => 'required',
-            
-        ], [
-            'projectname.required' => 'The project name field is requiredi.',
-            'projectdescription.required' => 'The project description field is required.',
-            // 'projectdetails.required' => 'The project detail field is required.',
-            'projectimage.required' => 'Profile picture must be uploaded.',
-            'projectimage.image' => 'The file must be an image.',
-            'projectimage.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-        ]);
-
         $nm = $request->projectimage;
         $namaFile = $nm->getClientOriginalName();
 
@@ -61,12 +42,11 @@ class ProjectPageController extends Controller
         $dtUpload->projectimage = $namaFile;
         $dtUpload->projectname = $request->projectname;
         $dtUpload->projectdescription = $request->projectdescription;
-        // $dtUpload->projectdetails = $request->projectdetails;
 
         $nm->move(public_path().'/projectimg', $namaFile);
         $dtUpload->save();
 
-        return redirect('dataourproject')->with('success', 'Data Changed Successfully!');
+        return redirect('dataproject')->with('success', 'Data Berhasil Tersimpan!');
 
 
     }
@@ -97,43 +77,21 @@ class ProjectPageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $ubah = ProjectPage::findorfail($id);
+        $ubah = Projectpage::findorfail($id);
+        $awal = $ubah->projectimage;
 
-        // Memeriksa apakah ada file gambar yang diunggah
-        if ($request->hasFile('projectimage')) {
-            // Validasi form untuk file gambar
-            $request->validate([
-                'projectimage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ], [
-                'projectimage.image' => 'The file must be an image.',
-                'projectimage.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-            ]);
-    
-            // Proses penyimpanan file gambar
-            $nm = $request->projectimage;
-            $namaFile = $nm->getClientOriginalName();
-            $nm->move(public_path().'/projectimg ', $namaFile);
-    
-            // Update data dengan file gambar baru
-            $dt = [
-                'projectname' => $request['projectname'],
-                'projectdescription' => $request['projectdescription'],
-                // 'projectdetails' => $request['projectdetails'],
-                'projectimage' => $namaFile,
-            ];
-        } else {
-            // Update data tanpa mengubah file gambar
-            $dt = [
-                'projectname' => $request['projectname'],
-                'projectdescription' => $request['projectdescription'],
-                // 'projectdetails' => $request['projectdetails'],
-                
-            ];
-        }
-    
+        $dt = [
+            'projectname' => $request['projectname'],
+            'projectdescription' => $request['projectdescription'],
+            'projectimage' => $awal,
+
+        ];
+        $request->projectimage->move(public_path().'/projectimg', $awal);
         $ubah->update($dt);
-        return redirect('dataourproject')->with('success', 'Data Updated Successfully!');
+        return redirect('dataproject')->with('success', 'Data Berhasil Di update!');
+        
     }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -149,7 +107,7 @@ class ProjectPageController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data Deleted Successfully');
+        return back()->with('info','Data berhasil dihapus');
 
     }
     

@@ -32,30 +32,14 @@
                  <div class="form-group">
                   <label for="exampleInputEmail1" class="form-label">Project Name</label>
                   <input type="text" id="projectname" name="projectname" class="form-control">
-                  @error('projectname')
-                  <span class="text-danger">{{ $message }}</span>
-                  @enderror
-                </div>
+                 </div>
                  <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label">Project Description</label>
                     <input type="text" id="projectdescritpion" name="projectdescription" class="form-control">
-                    @error('projectdescription')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
                    </div>
-                   {{-- <div class="form-group">
-                    <label for="exampleInputEmail1" class="form-label">Project Detail</label>
-                    <input type="text" id="projectdetails" name="projectdetails" class="form-control">
-                    @error('projectdetails')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                   </div> --}}
                    <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label">Project image</label>
                     <input type="file" id="projectimage" name="projectimage" class="form-control">
-                    @error('projectimage')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
                    </div>
                  <div class="form-group">
                   <button type="submit" class="btn btn-success">Simpan data</button>

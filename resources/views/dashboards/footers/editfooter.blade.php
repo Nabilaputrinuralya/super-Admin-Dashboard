@@ -32,9 +32,6 @@
                   <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label">Website Logo</label>
                     <input type="file" id="websitelogo" name="websitelogo" class="form-control" value="{{ $dt->websitelogo }}">
-                    @error('websitelogo')
-                      <span class="text-danger">{{ $message }}</span>
-                    @enderror
                    </div>
                    <div class="form-group">
                     <img class="table-active" src="{{asset('footerimg/'.$dt->websitelogo)}}" width="200px" alt="" srcset="">

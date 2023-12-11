@@ -48,9 +48,7 @@
                               <td>{{ $item->copyright }}</td>
                               <td>
                                 {{-- <a href="{{ url('showfooter',$item->id) }}" class="btn btn-secondary">Show</a> --}}
-                                <a href="{{ url('editfooter',$item->id) }}" class="btn btn-primary">
-                                  <i class="fas fa-edit"></i>&nbsp;Edit</i>
-                                </a>
+                                <a href="{{ url('editfooter',$item->id) }}" class="btn btn-primary">Edit</a>
                                 {{-- <a href="{{ url('deletefooter',$item->id) }}" class="btn btn-danger">Delete</a> --}}
                               </td>    
                           </tr>

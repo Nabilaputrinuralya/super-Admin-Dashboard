@@ -3,8 +3,6 @@
 
 @section('content')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-HyZ9nLqCjk1/6d0bklOdLJ17gWlW4zUHyI4XcewBXe4X3qJ3fCq7Tp3w9NJi9dP" crossorigin="anonymous">
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -55,20 +53,14 @@
                          <td>{{ $item->subject }}</td>
                          <td>{{ $item->message }}</td>
                          <td>
-                          @if($item->status==0)
-                          <a href="{{ url('change-status/'.$item->id) }}" onclick="return confirm('Are You Sure?')" class="btn btn-sm btn-success">
-                            <i class="fas fa-envelope-open"></i> Already Read
-                          </a>
-                      @else
-                          <a href="{{ url('change-status/'.$item->id) }}" onclick="return confirm('Are You Sure?')" class="btn btn-sm btn-secondary">
-                              <i class="fas fa-envelope"></i> Unread
-                          </a>
-                      @endif
+                           @if($item->status==0)
+                           <a href="{{ url('change-status/'.$item->id) }}" onclick="return confirm('Are You Sure?')" class="btn btn-sm btn-success">Already Read</a>
+                           @else
+                           <a href="{{ url('change-status/'.$item->id) }}" onclick="return confirm('Are You Sure?')" class="btn btn-sm btn-secondary">Unread</a>
+                           @endif
                         </td>
                         <td>
-                          <a href="{{ url('deletemessage',$item->id) }}" class="btn btn-danger" data-confirm-delete="true">
-                            <i class="fas fa-trash-alt"></i>Delete
-                          </a>
+                        <a href="{{ url('deletemessage',$item->id) }}" class="btn btn-danger">Delete</a>
                       </td>
                      </tr>
                      @endforeach

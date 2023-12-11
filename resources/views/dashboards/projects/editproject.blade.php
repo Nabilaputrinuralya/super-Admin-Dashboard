@@ -27,7 +27,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-8">
-              <form action="{{ route('updateproject', $dt->id) }}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('udpateproject', $dt->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label">Project Name</label>
@@ -37,27 +37,16 @@
                       <label for="exampleInputEmail1" class="form-label">Project Description</label>
                       <input type="text" id="projectdescritpion" name="projectdescription" class="form-control" value="{{ $dt->projectdescription }}">
                      </div>
-                     {{-- <div class="form-group">
-                      <label for="exampleInputEmail1" class="form-label">Project Detail</label>
-                      <input type="text" id="projectdetails" name="projectdetails" class="form-control" value="{{ $dt->projectdetails }}">
-                     </div> --}}
                      <div class="form-group">
                       <label for="exampleInputEmail1" class="form-label">Project image</label>
                       <input type="file" id="projectimage" name="projectimage" class="form-control" value="{{ $dt->projectimage }}">
-                      @error('projectimage')
-                      <span class="text-danger">{{ $message }}</span>
-                      @enderror
                      </div>
                  <div class="form-group">
                     <img src="{{asset('projectimg/'.$dt->projectimage)}}" width="200px" alt="" srcset="">
                  </div>
                  <div class="form-group">
-                  <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> Changes Data
-                  </button>
-                  <a href="{{ url('dataourproject') }}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Back
-                  </a>
+                  <button type="submit" class="btn btn-success">Ubah data</button>
+                 </div>
               </form>
             </div>
           </form>

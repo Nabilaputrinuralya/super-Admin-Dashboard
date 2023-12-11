@@ -29,24 +29,18 @@
                 <div class="col-8">
                 <form action="{{ route('simpanusermanagement') }}" method="post" enctype="multipart/form-data">
                   @csrf
-                  <div class="form-group">
-                    <label for="" class="form-label">Project User</label>
-                    <select name="userproject" class="form-control">
-                        <option value="">--Pilih--</option>
-                        @foreach($projectmanagement as $user)
-                            <option value="{{ $user->projectname }}">{{ $user->projectname }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                  <label for="" class="form-label">User Name</label>
-                  <select name="username" class="form-control">
-                      <option value="">--Pilih--</option>
-                      @foreach($projectmanagement as $user)
-                          <option value="{{ $user->projectuser }}">{{ $user->projectuser }}</option>
-                      @endforeach
-                  </select>
-              </div>
+                   <div class="form-group">
+                    <label for="exampleInputEmail1" class="form-label">User Project</label>
+                    <input type="text" id="userproject" name="userproject" class="form-control">
+                   </div>
+                   <div class="form-group">
+                      <label for="exampleInputEmail1" class="form-label">User ID</label>
+                      <input type="text" id="userid" name="userid" class="form-control">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleInputEmail1" class="form-label">User Name</label>
+                        <input type="text" id="username" name="username" class="form-control">
+                       </div>
                        <div class="form-group">
                         <label for="exampleInputEmail1" class="form-label">Email</label>
                         <input type="email" id="email" name="email" class="form-control">

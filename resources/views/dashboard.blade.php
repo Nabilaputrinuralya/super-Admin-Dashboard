@@ -1,28 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ asset('assets/css/test.css') }}">
 
-  <title>Button Logout</title>
-</head>
-<body>
-    <style>
-        .logout-button {
-          background-color: #d9534f;
-          color: #fff;
-          padding: 8px 16px;
-          border-radius: 5px;
-          text-decoration: none;
-        }
-      
-        .logout-button:hover {
-          background-color: #c9302c;
-        }
-      </style>
-      <a class="nav-link logout-button" href="http://127.0.0.1:8000/landingpage">
-        <i class="fas fa-sign-out-alt"></i> Logout
-      </a>
+    <link rel="stylesheet" href="{{ asset('assets/css/twotemplatemo-chain-app-dev.css') }}">
+
+  <div class="containerdua">
+    <div class="headerdua"> 
+      <div class="main"> 
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <form method="POST" action="{{ route('login') }}">
+          @csrf
+          <input id="username" type="text" placeholder="Username" class="input" name="username" required>
+        <br>
+        <input id="password" type="password" placeholder="Password" class="input" name="password" required>        
+        <br>
+        <span class="text-danger">@error('username'){{ $message }}@enderror</span>
+        <br/>
+        <button class="buttonlogin textplus">{{ __('Login') }}</button>
+        </div>
+        <br/>
+        <br/>
+    </div>
+      </form>
+    </div>
+  </div>
+  
+
+ 
+
+ 
 </body>
 </html>

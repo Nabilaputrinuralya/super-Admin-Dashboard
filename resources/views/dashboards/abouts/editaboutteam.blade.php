@@ -48,20 +48,13 @@
                      <div class="form-group">
                       <label for="exampleInputEmail1" class="form-label">Profile Picture</label>
                       <input type="file" id="profilepicture" name="profilepicture" class="form-control" value="{{ $dt->profilepicture }}">
-                      @error('profilepicture')
-                                <span class="text-danger">{{ $message }}</span>
-                      @enderror
                      </div>
                  <div class="form-group">
                     <img src="{{asset('aboutimg/'.$dt->profilepicture)}}" width="200px" alt="" srcset="">
                  </div>
                  <div class="form-group">
-                  <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> Changes Data
-                  </button>
-                  <a href="{{ url('dataabout') }}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Back
-                  </a>
+                  <button type="submit" class="btn btn-success">Ubah data</button>
+                 </div>
               </form>
             </div>
           </form>

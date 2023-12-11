@@ -27,7 +27,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-8">
-            <form action="{{ route('updateprojectmanagement') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('updatepms', $dt->id) }}" method="post" enctype="multipart/form-data">
               @csrf
                    <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label">Project ID</label>
@@ -44,7 +44,7 @@
                    <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label">Project Deadline</label>
                     <input type="date" id="projectdeadline" name="projectdeadline" class="form-control" value="{{ $dt->projectdeadline }}">
-                   </div>   
+                   </div>
                <div class="form-group">
                 <button type="submit" class="btn btn-success">Ubah data</button>
                </div>

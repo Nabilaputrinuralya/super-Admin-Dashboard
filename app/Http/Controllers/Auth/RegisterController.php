@@ -6,9 +6,10 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 
@@ -55,7 +56,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'favoriteColor'=>'required',
+            // 'favoriteColor'=>'required',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
@@ -67,51 +68,51 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    // protected function create(array $data)
-    // {
-    //     return User::create([
-    //         'name' => $data['name'],
-    //         'email' => $data['email'],
-    //         'role' =>2,
-    //         'favoriteColor'=>$data['favoriteColor'],
-    //         'password' => Hash::make($data['password']),
-    //     ]);
-    // }
-
-    function register(Request $request){
-
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone'=>'required',
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            // 'role' =>2,
+            // 'favoriteColor'=>$data['favoriteColor'],
+            'password' => Hash::make($data['password']),
         ]);
-
-    /** Make avata */
-
-    $path = 'users/images/';
-    $fontPath = public_path('fonts/Oliciy.ttf');
-    $char = strtoupper($request->name[0]);
-    $newAvatarName = rand(12,34353).time().'_avatar.png';
-    $dest = $path.$newAvatarName;
-
-    $createAvatar = makeAvatar($fontPath,$dest,$char);
-    $picture = $createAvatar == true ? $newAvatarName : '';
-
-    $user = new User();
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->role = 2;
-    $user->phone = $request->phone;
-    $user->picture = $picture;
-    $user->password = \Hash::make($request->password);
-
-    if( $user->save() ){
-
-        return redirect()->back()->with('success','You are now successfully registerd');
-     }else{
-         return redirect()->back()->with('error','Failed to register');
-        }
-        
     }
+
+    // function register(Request $request){
+
+    //     $request->validate([
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'phone'=>'required',
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //     ]);
+
+    /** Make avatar **/
+
+    // $path = 'users/images/';
+    // $fontPath = public_path('fonts/Oliciy.ttf');
+    // $char = strtoupper($request->name[0]);
+    // $newAvatarName = rand(12,34353).time().'_avatar.png';
+    // $dest = $path.$newAvatarName;
+
+    // $createAvatar = makeAvatar($fontPath,$dest,$char);
+    // $picture = $createAvatar == true ? $newAvatarName : '';
+
+    // $user = new User();
+    // $user->name = $request->name;
+    // $user->email = $request->email;
+    // // $user->role = 2;
+    // $user->phone = $request->phone;
+    // // $user->picture = $picture;
+    // $user->password = \Hash::make($request->password);
+
+    // if( $user->save() ){
+
+    //     return redirect()->back()->with('success','You are now successfully registerd');
+    //  }else{
+    //      return redirect()->back()->with('error','Failed to register');
+    //     }
+        
+    // }
 }

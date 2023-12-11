@@ -52,9 +52,6 @@
                        <div class="form-group">
                         <label for="exampleInputEmail1" class="form-label">Profile Picture</label>
                         <input type="file" id="profilepicture" name="profilepicture" class="form-control" value="{{ $dt->profilepicture }}">
-                        @error('profilepicture')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
                        </div>
                    <div class="form-group">
                       <img src="{{asset('usermanagementimg/'.$dt->profilepicture)}}" width="40px" alt="" srcset="">

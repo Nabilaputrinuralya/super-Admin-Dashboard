@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserManagement;
-use App\Models\ProjectManagement;
 
 class UserManagementController extends Controller
 {
@@ -27,31 +26,31 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        $projectmanagement = ProjectManagement::all();
-        return view('dashboards.usermanagements.createusermanagement', compact('projectmanagement'));
+        return view('dashboards.usermanagements.createusermanagement');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
-{
-    $nm = $request->profilepicture;
-    $namaFile = $nm->getClientOriginalName();
+    {
+        $nm = $request->profilepicture;
+        $namaFile = $nm->getClientOriginalName();
 
-    $dtUpload = new UserManagement;
+        $dtUpload = new UserManagement;
+        
+        $dtUpload->profilepicture = $namaFile;
+        $dtUpload->userproject = $request->userproject;
+        $dtUpload->userid = $request->userid;
+        $dtUpload->username = $request->username;
+        $dtUpload->email = $request->email;
+        $dtUpload->phone = $request->phone;
 
-    // Mengatur userid berdasarkan timestamp YmdHis
-    $dtUpload->userid = 'VZAD_' . date('YmdHis');
+        $nm->move(public_path().'/usermanagementimg', $namaFile);
+        $dtUpload->save();
 
-    $dtUpload->profilepicture = $namaFile;
-    $dtUpload->userproject = $request->userproject;
-    $dtUpload->username = $request->username;
-    $dtUpload->email = $request->email;
-    $dtUpload->phone = $request->phone;
-
-    $nm->move(public_path().'/usermanagementimg', $namaFile);
-    $dtUpload->save();
-
-    return redirect('datausermanagement')->with('success', 'Data Berhasil Tersimpan!');
-}
+        return redirect('datausermanagement')->with('success', 'Data Berhasil Tersimpan!');
+    }
 
     /**
      * Display the specified resource.
@@ -80,46 +79,24 @@ class UserManagementController extends Controller
     public function update(Request $request, string $id)
     {
         $ubah = UserManagement::findorfail($id);
+        $awal = $ubah->profilepicture;
 
-        // Memeriksa apakah ada file gambar yang diunggah
-        if ($request->hasFile('profilepicture')) {
-            // Validasi form untuk file gambar
-            $request->validate([
-                'profilepicture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ], [
-                'profilepicture.image' => 'The file must be an image.',
-                'profilepicture.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
-            ]);
-    
-            // Proses penyimpanan file gambar
-            $nm = $request->profilepicture;
-            $namaFile = $nm->getClientOriginalName();
-            $nm->move(public_path().'/usermanagementimg ', $namaFile);
-    
-            // Update data dengan file gambar baru
-            $dt = [
-                'userproject' => $request['userproject'],
-                'userid' => $request['userid'],
-                'username' => $request['username'],
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                'profilepicture' => $namaFile,
-            ];
-        } else {
-            // Update data tanpa mengubah file gambar
-            $dt = [
-                'userproject' => $request['userproject'],
-                'userid' => $request['userid'],
-                'username' => $request['username'],
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                
-            ];
-        }
-    
+        $dt = [
+            'profilepicture' => $request['profilepicture'],
+            'userproject' => $request['userproject'],
+            'userid' => $request['userid'],
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'profilepicture' => $awal,
+
+        ];
+        $request->profilepicture->move(public_path().'/usermanagementimg', $awal);
         $ubah->update($dt);
         return redirect('datausermanagement')->with('success', 'Data Berhasil Di update!');
+        
     }
+
     /**
      * Remove the specified resource from storage.
      */

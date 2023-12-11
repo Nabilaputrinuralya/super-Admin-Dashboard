@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PortalLogin;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -12,8 +11,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        $dataPortalLogin = PortalLogin::all();
-        return view('dashboard',compact('dataPortalLogin'));
+        return view('dashboard');
     }
 
     /**

@@ -35,9 +35,7 @@
                       <td>{{ $item->description }}</td>
                       <td>
                         {{-- <a href="{{ url('showproject',$item->id) }}" class="btn btn-secondary">Show</a> --}}
-                        <a href="{{ url('editaboutdescription',$item->id) }}" class="btn btn-primary">
-                          <i class="fas fa-edit"></i>&nbsp;Edit</i>
-                        </a>
+                        <a href="{{ url('editaboutdescription',$item->id) }}" class="btn btn-primary">Edit</a>
                         {{-- <a href="{{ url('deleteaboutdescription',$item->id) }}" class="btn btn-danger">Delete</a> --}}
                       </td>    
                   </tr>
@@ -45,10 +43,7 @@
             </tbody>
           </table>
 
-          <a href="{{ route('createaboutteam') }}" class="btn btn-success mt-2 mb-3 justify-content-between">
-            <span>Add New Member</span>
-            <i class="fas fa-plus-circle"></i>
-          </a>
+                <a href="{{ route('createaboutteam') }}" class="btn btn-success  mt-2 mb-3 ">Tambah <i class="fas fa-plus-square"></i></a>
                       <table id="myDataTable1" class="table table-bordered tbale-hover">
                       <thead>
                       <tr>
@@ -77,14 +72,8 @@
                             </td>
                             <td>
                                {{-- <a href="{{ url('showproject',$item->id) }}" class="btn btn-secondary">Show</a> --}}
-                             <a href="{{ url('editaboutteam',$item->id) }}" class="btn btn-primary mb-2">
-                              <i class="fas fa-edit"></i>&nbsp;Edit</i>
-                            </a>
-                            {{-- <br/>
-                            <br/> --}}
-                            <a href="{{ url('deleteaboutteam',$item->id) }}" class="btn btn-danger" data-confirm-delete="true">
-                                <i class="fas fa-trash-alt"></i>Delete</i>
-                              </a>
+                             <a href="{{ url('editaboutteam',$item->id) }}" class="btn btn-primary">Edit</a>
+                              <a href="{{ url('deleteaboutteam',$item->id) }}" class="btn btn-danger">Delete</a>
                             </td>    
                         </tr>
                         @endforeach
@@ -97,8 +86,6 @@
 </div>
 <br/>
     <!-- /.content -->
-@include('sweetalert::alert')
+
 @endsection
-
-
  

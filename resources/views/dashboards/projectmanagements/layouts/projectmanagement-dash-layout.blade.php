@@ -15,23 +15,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-   <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css') }}">
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css') }}">
+  <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/button.css') }}">
+  <!-- BS Stepper -->
+  <link rel="stylesheet" href="{{ asset('plugins/bs-stepper/css/bs-stepper.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="sidebar-mini layout-fixed text-sm">
 <div class="wrapper">
-
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('assets/images/Dashboard_Logo/Dashboard_Logo_Dark.png') }}" alt="AdminLTELogo" height="60" width="60">
-  </div>
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -40,12 +37,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-     <!-- Right navbar links -->
-     <a class="nav-link logout-button" href="http://127.0.0.1:8000/landingpage">
-        <i class="fas fa-sign-out-alt"></i> Logout
-      </a>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a class="nav-link" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
 
-
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
       </li>
     </ul>
 
@@ -100,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
                <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-magic"></i>
+                  <i class="nav-icon fas fa-edit"></i>
                   <p>
                     Edit Page
                     <i class="fas fa-angle-left right"></i>
@@ -126,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('dataourproject')}}" class="nav-link {{ (request()->is('dataourproject*')) ? 'active' : '' }}">
+                    <a href="{{ route('dataproject')}}" class="nav-link {{ (request()->is('dataproject*')) ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Our Projects Page</p>
                     </a>
@@ -145,38 +146,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </li>
                 </ul>
               </li>
-              <li class="nav-item menu-open">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-project-diagram"></i>
-                  <p>
-                    Project Management
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('dataprojectmanagement')}}" class="nav-link {{ (request()->is('dataprojectmanagement*')) ? 'active' : '' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Create New Project</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('dataportallogin')}}" class="nav-link {{ (request()->is('dataportallogin*')) ? 'active' : '' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Portal Login</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-          {{-- <li class="nav-item">
+          <li class="nav-item">
+            <a href="{{ route('datapms')}}" class="nav-link {{ (request()->is('datapms*')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-folder"></i>
+              <p>Project Management</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('datausermanagement')}}" class="nav-link {{ (request()->is('datausermanagement*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-user"></i> 
               <p>User Management</p>
             </a>
-          </li> --}}
+          </li>
           <li class="nav-item">
             <a href="{{ route('datamessage')}}" class="nav-link {{ (request()->is('datamessage*')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-comments"></i>
+              <i class="nav-icon fas fa-envelope"></i>
               <p>Message Management</p>
             </a>
           </li>
@@ -207,12 +191,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
+      Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2023 <a href="http://127.0.0.1:8000/landingpage">ProKing Indonesia</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
 </div>
-@include('sweetalert::alert')
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
@@ -235,6 +219,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ ('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<!-- BS-Stepper -->
+<script src="{{ asset('plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 
@@ -388,14 +374,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
          });
     });
     
+
+    
   });
 
-  // NAVBAR
+  // BS-Stepper Init
+  document.addEventListener('DOMContentLoaded', function () {
+  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+  })
 
+  // NAVBAR
   $(document).on('click','#change_picture_navbar', function(){
       $('#navbar_image').click();
-
-    });
+  });
+    
 
 </script>
 </body>

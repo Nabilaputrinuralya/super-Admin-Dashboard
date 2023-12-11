@@ -1,52 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login Form Design</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Login page</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/my-login.css">
 </head>
-<body> 
-    <div class="container">
-        <div class="myCard">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="myLeftCtn"> 
-                        <form class="myForm text-center" method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <header>Login</header>
-                            <div class="form-group">
-                                <i class="fas fa-envelope"></i>
-                                <input class="myInput mt-4" type="email" placeholder="Email" id="email" name="email" required>
-                            </div>
 
-                            <div class="form-group">
-                                <i class="fas fa-lock"></i>
-                                <input class="myInput" type="password" id="password" placeholder="Password" name="password" required>
-                            </div>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+			
+					<div class="cardx fat mt-5">
+						<div class="card-body">
+							<h4 class="card-title">Login</h4>
+							<form method="POST" class="my-login-validation" autocomplete="off" action="{{ route('login') }}">
+                                @csrf
+								<div class="form-group">
+									<label for="email">E-Mail Address</label>
+									<input id="email" type="email" class="form-control" name="email" value="" required autofocus placeholder="Enter email">
+                                    <span class="text-danger">@error('email'){{ $message }}@enderror</span>
+								</div>
 
-                            <input type="submit" class="butt mt-2" value="LOGIN">
-                        </form>
-                    </div>
-                </div> 
-                <div class="col-md-6">
-                    <div class="myRightCtn">
-                        <div class="box">
-                            <header>Project Name</header>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                sed do eiusmod tempor incididunt ut labore et dolore magna 
-                                aliqua. Ut enim ad minim veniam.</p>
-                            <input type="button" class="butt_out" value="Learn More"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-      
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+								<div class="form-group">
+									<label for="password">Password
+										<a href="{{route('password.request')}}" class="float-right">
+											Forgot Password?
+										</a>
+									</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye placeholder="Enter password">
+                                    <span class="text-danger">@error('password'){{ $message }}@enderror</span>
+								</div>
+
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="remember" id="remember" class="custom-control-input">
+										<label for="remember" class="custom-control-label">Remeber Me</label>
+									</div>
+								</div>
+
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block">
+										Login
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									Don't have an account? <a href="{{route('register')}}">Create One</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<script src="bootstrap/js/popper.js"></script>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/my-login.js"></script>
 </body>
 </html>
+ 

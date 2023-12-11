@@ -33,13 +33,9 @@
                     <label for="exampleInputEmail1" class="form-label">About Us Description</label>
                     <input type="text" id="description" name="description" class="form-control" value="{{ $dt->description }}">
                    </div>
-                   <div class="form-group">
-                    <button type="submit" class="btn btn-success">
-                      <i class="fas fa-save"></i> Changes Data
-                    </button>
-                    <a href="{{ url('dataabout') }}" class="btn btn-secondary">
-                      <i class="fas fa-arrow-left"></i> Back
-                    </a>
+                 <div class="form-group">
+                  <button type="submit" class="btn btn-success">Ubah data</button>
+                 </div>
               </form>
             </div>
           </form>

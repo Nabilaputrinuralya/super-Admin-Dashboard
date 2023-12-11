@@ -16,21 +16,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
    <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css') }}">
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
 <body class="sidebar-mini layout-fixed text-sm">
 <div class="wrapper">
-
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('assets/images/Dashboard_Logo/Dashboard_Logo_Dark.png') }}" alt="AdminLTELogo" height="60" width="60">
-  </div>
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -60,8 +50,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ \URL::to('/')}}" class="brand-link">
-      <img src="{{ asset('assets/images/Dashboard_Logo/Dashboard_Logo_Light.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">EL SMART</span>
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Your Site</span>
     </a>
 
     <!-- Sidebar -->
@@ -69,10 +59,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ Auth::user()->picture }}" class="img-circle elevation-2 admin_picture" alt="User Image">
+          <img src="{{ Auth::user()->picture }}" class="img-circle elevation-2 user_picture" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{ route('admin.profile')}}" class="d-block admin_name">{{ Auth::user()->name }}</a>
+          <a href="{{ route('user.profile')}}" class="d-block user_name">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -94,7 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-item">
-                <a href="{{ route('admin.dashboard')}}" class="nav-link {{ (request()->is('admin/dashboard*')) ? 'active' : '' }}">
+                <a href="{{ route('user.dashboard')}}" class="nav-link {{ (request()->is('user/dashboard*')) ? 'active' : '' }}">
                   <i class="nav-icon fas fa-th-large"></i>
                   <p>
                     Dashboard
@@ -102,8 +92,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
                <li class="nav-item menu-open">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-magic"></i>
+                <a href="#" class="nav-link active">
+                  <i class="nav-icon fas fa-edit"></i>
                   <p>
                     Edit Page
                     <i class="fas fa-angle-left right"></i>
@@ -111,74 +101,57 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ route('datanavbar')}}" class="nav-link {{ (request()->is('datanavbar*')) ? 'active' : '' }}">
+                    <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Navigation Bar</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('datahome')}}" class="nav-link {{ (request()->is('datahome*')) ? 'active' : '' }}">
+                    <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Home page</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('dataabout')}}" class="nav-link {{ (request()->is('dataabout*')) ? 'active' : '' }}">
+                    <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>About Us Page</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('dataproject')}}" class="nav-link {{ (request()->is('dataproject*')) ? 'active' : '' }}">
+                    <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Our Projects Page</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('datacontact')}}" class="nav-link {{ (request()->is('datacontact*')) ? 'active' : '' }}">
+                    <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Contact Us Page</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('datafooter')}}" class="nav-link {{ (request()->is('datafooter*')) ? 'active' : '' }}">
+                    <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Footer</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item menu-open">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-folder-open"></i>
-                  <p>
-                    Project Management
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('dataprojectmanagement')}}" class="nav-link {{ (request()->is('dataprojectmanagement*')) ? 'active' : '' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Create New Project</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('datahome')}}" class="nav-link {{ (request()->is('datahome*')) ? 'active' : '' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Portal Login</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
           <li class="nav-item">
-            <a href="{{ route('datausermanagement')}}" class="nav-link {{ (request()->is('datausermanagement*')) ? 'active' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-folder"></i>
+              <p>Project Management</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i> 
               <p>User Management</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('datamessage')}}" class="nav-link {{ (request()->is('datamessage*')) ? 'active' : '' }}">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>Message Management</p>
             </a>
@@ -213,7 +186,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2023 <a href="http://127.0.0.1:8000/landingpage">ProKing Indonesia</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -225,84 +198,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- DataTables  & Plugins -->
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
-<script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
-<script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-<script src="{{ ('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 
 {{-- CUSTOM JS CODES --}}
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": false,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": false,
-      "info": false,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-  $(function () {
-    $("#myTable1").DataTable({
-      "responsive": true,
-      "lengthChange": true,
-      "autoWidth": false,
-      "buttons": [
-        {
-                extend: 'copy',
-                text: '<i class="fa fa-copy mr-2"></i> Copy',
-                className: 'btn btn-secondary'
-            },
-            {
-                extend: 'excel',
-                text: '<i class="fa fa-file-excel mr-2"></i> Export to Excel',
-                className: 'btn btn-secondary'
-            },
-            {
-                extend: 'pdf',
-                text: '<i class="fa fa-file-pdf mr-2"></i> Export to PDF',
-                className: 'btn btn-secondary'
-            },
-            {
-                extend: 'print',
-                text: '<i class="fa fa-print mr-2"></i> Print',
-                className: 'btn btn-secondary'
-            }
-        ]
-    }).buttons().container().appendTo('#myTable1_wrapper .col-md-6:eq(0)');
-    $("#myTable2").DataTable({
-      "responsive": true,
-      "lengthChange": true,
-      "autoWidth": false
-    });
-    $("#myDataTable1, #myDataTable2, #myDataTable3, #myDataTable4, #myDataTable5").DataTable({
-      "responsive": true,
-      "lengthChange": true,
-      "autoWidth": false
-    });
-  });
-
-
-
-
-
 
   $.ajaxSetup({
      headers:{
@@ -314,7 +214,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     /* UPDATE ADMIN PERSONAL INFO */
 
-    $('#AdminInfoForm').on('submit', function(e){
+    $('#UserInfoForm').on('submit', function(e){
         e.preventDefault();
 
         $.ajax({
@@ -333,8 +233,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('span.'+prefix+'_error').text(val[0]);
                   });
                 }else{
-                  $('.admin_name').each(function(){
-                     $(this).html( $('#AdminInfoForm').find( $('input[name="name"]') ).val() );
+                  $('.user_name').each(function(){
+                     $(this).html( $('#UserInfoForm').find( $('input[name="name"]') ).val() );
                   });
                   alert(data.msg);
                 }
@@ -345,17 +245,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
     $(document).on('click','#change_picture_btn', function(){
-      $('#admin_image').click();
+      $('#user_image').click();
     });
 
 
-    $('#admin_image').ijaboCropTool({
-          preview : '.admin_picture',
+    $('#user_image').ijaboCropTool({
+          preview : '.user_picture',
           setRatio:1,
           allowedExtensions: ['jpg', 'jpeg','png'],
           buttonsText:['CROP','QUIT'],
           buttonsColor:['#30bf7d','#ee5155', -15],
-          processUrl:'{{ route("adminPictureUpdate") }}',
+          processUrl:'{{ route("userPictureUpdate") }}',
           // withCSRF:['_token','{{ csrf_token() }}'],
           onSuccess:function(message, element, status){
              alert(message);
@@ -366,7 +266,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        });
 
 
-    $('#changePasswordAdminForm').on('submit', function(e){
+    $('#changePasswordUserForm').on('submit', function(e){
          e.preventDefault();
 
          $.ajax({
@@ -385,46 +285,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   $('span.'+prefix+'_error').text(val[0]);
                 });
               }else{
-                $('#changePasswordAdminForm')[0].reset();
+                $('#changePasswordUserForm')[0].reset();
                 alert(data.msg);
               }
             }
          });
     });
     
-  });
 
-  $(function(){
-    $(document).on('click', '#delete', function(e){
-      e.preventDefault();
-      var link = $(this).attr("href");
-
-      Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, delete it!"
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire({
-      title: "Deleted!",
-      text: "Your file has been deleted.",
-      icon: "success"
-    });
-  }
-});
-    });
+    
   });
 
   // NAVBAR
 
   $(document).on('click','#change_picture_navbar', function(){
       $('#navbar_image').click();
-
     });
+
     
 
 </script>
