@@ -20,6 +20,8 @@ class AboutController extends Controller
     {
         $dataAboutDescription = AboutDescription::all();
         $dataAboutTeam = AboutTeam::all();
+        $title = 'Delete User!';$text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('dashboards.abouts.dataabout',compact('dataAboutDescription','dataAboutTeam'));
     }
 
@@ -53,7 +55,7 @@ class AboutController extends Controller
 
         $dtUpload->save();
 
-        return redirect('dataabout')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('dataabout')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -94,7 +96,7 @@ class AboutController extends Controller
         $nm->move(public_path().'/aboutimg', $namaFile);
         $dtUpload->save();
 
-        return redirect('dataabout')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('dataabout')->with('success', 'Data Changed Successfully!');
     }
 
     /**
@@ -139,7 +141,7 @@ class AboutController extends Controller
             
         ];
         $ubah->update($dt);
-        return redirect('dataabout')->with('success', 'Data Berhasil Di update!');
+       return redirect('dataabout')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -184,7 +186,7 @@ class AboutController extends Controller
         }
     
         $ubah->update($dt);
-        return redirect('dataabout')->with('success', 'Data Berhasil Di update!');
+        return redirect('dataabout')->with('success', 'Data Updated Successfully!');
     }
 
 
@@ -197,7 +199,7 @@ class AboutController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     
@@ -216,8 +218,7 @@ class AboutController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
-
+        return back()->with('info','Data Deleted Successfully');
     }
     
 

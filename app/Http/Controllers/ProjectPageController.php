@@ -18,6 +18,9 @@ class ProjectPageController extends Controller
     public function index(Request $request)
     {
         $dataProject = ProjectPage::all();
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('dashboards.projects.dataproject',compact('dataProject'));
     }
 
@@ -38,11 +41,13 @@ class ProjectPageController extends Controller
         $request->validate([
             'projectname' => 'required',
             'projectdescription' => 'required',
-            'projectimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'projectdetails' => 'required',
+            'projectimage' => 'required',
             
         ], [
             'projectname.required' => 'The project name field is requiredi.',
             'projectdescription.required' => 'The project description field is required.',
+            // 'projectdetails.required' => 'The project detail field is required.',
             'projectimage.required' => 'Profile picture must be uploaded.',
             'projectimage.image' => 'The file must be an image.',
             'projectimage.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
@@ -56,11 +61,12 @@ class ProjectPageController extends Controller
         $dtUpload->projectimage = $namaFile;
         $dtUpload->projectname = $request->projectname;
         $dtUpload->projectdescription = $request->projectdescription;
+        // $dtUpload->projectdetails = $request->projectdetails;
 
         $nm->move(public_path().'/projectimg', $namaFile);
         $dtUpload->save();
 
-        return redirect('dataourproject')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('dataourproject')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -112,6 +118,7 @@ class ProjectPageController extends Controller
             $dt = [
                 'projectname' => $request['projectname'],
                 'projectdescription' => $request['projectdescription'],
+                // 'projectdetails' => $request['projectdetails'],
                 'projectimage' => $namaFile,
             ];
         } else {
@@ -119,12 +126,13 @@ class ProjectPageController extends Controller
             $dt = [
                 'projectname' => $request['projectname'],
                 'projectdescription' => $request['projectdescription'],
+                // 'projectdetails' => $request['projectdetails'],
                 
             ];
         }
     
         $ubah->update($dt);
-        return redirect('dataourproject')->with('success', 'Data Berhasil Di update!');
+        return redirect('dataourproject')->with('success', 'Data Updated Successfully!');
     }
     /**
      * Remove the specified resource from storage.
@@ -141,7 +149,7 @@ class ProjectPageController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

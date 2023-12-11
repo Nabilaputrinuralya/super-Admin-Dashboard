@@ -236,7 +236,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <img src="{{asset('projectimg/'.$item->projectimage)}}"  class="card-img-top" alt="Project Image 1" srcset="">
               <div class="card-body">
                 <h4 class="card-title"><a href="#">{{ $item->projectname }}</a></h4>
-                <button class="action_btn">DETAILS</button>
+                {{-- <a href="{{ route('projectdetails') }}" class="action_btn">DETAILS</a> --}}
               </div>
               <p class="card-text">{{ $item->projectdescription }}</p>
             </div>

@@ -95,7 +95,7 @@ Route::get('/createproject',[ProjectPageController::class, 'create'])->name('cre
 Route::post('/simpanproject',[ProjectPageController::class, 'store'])->name('simpanproject');
 Route::get('/editproject/{id}',[ProjectPageController::class, 'edit'])->name('editproject');
 Route::post('/updateproject/{id}',[ProjectPageController::class, 'update'])->name('updateproject');
-Route::get('/deleteproject/{id}',[ProjectPageController::class, 'destroy'])->name('deleteproject');
+Route::delete('/deleteproject/{id}', [ProjectPageController::class, 'destroy'])->name('deleteproject');
 Route::get('/showproject/{id}',[ProjectPageController::class, 'show'])->name('showproject');
 
 /*NAVBAR*/
@@ -127,7 +127,7 @@ Route::get('/createaboutteam',[AboutController::class, 'createaboutteam'])->name
 Route::post('/simpanaboutteam',[AboutController::class, 'storeaboutteam'])->name('simpanaboutteam');
 Route::get('/editaboutteam/{id}',[AboutController::class, 'editaboutteam'])->name('editaboutteam');
 Route::post('/updateaboutteam/{id}',[AboutController::class, 'updateaboutteam'])->name('updateaboutteam');
-Route::get('/deleteaboutteam/{id}',[AboutController::class, 'destroyaboutteam'])->name('deleteaboutteam');
+Route::delete('/deleteaboutteam/{id}', [AboutController::class, 'destroyaboutteam'])->name('deleteaboutteam');
                                                                                                                                                                                                                                                                                                                                                                   
 Route::get('/dataabout',[AboutController::class, 'index'])->name('dataabout');
 Route::get('/createaboutdescription',[AboutController::class, 'createabboutdescription'])->name('createaboutdescription');
@@ -171,16 +171,17 @@ Route::get('/createprojectmanagement',[ProjectManagementController::class, 'crea
 Route::post('/simpanprojectmanagement',[ProjectManagementController::class, 'store'])->name('simpanprojectmanagement');
 Route::get('/editprojectmanagement/{id}',[ProjectManagementController::class, 'edit'])->name('editprojectmanagement');
 Route::post('/updateprojectmanagement',[ProjectManagementController::class, 'update'])->name('updateprojectmanagement');
-Route::get('/deleteprojectmanagement/{id}',[ProjectManagementController::class, 'destroy'])->name('deleteprojectmanagement');
+Route::delete('/deleteprojectmanagement/{id}', [ProjectManagementController::class, 'destroy'])->name('deleteprojectmanagement');
 // Route::get('/showpms/{id}',[ProjectManagementController::class, 'show'])->name('showpms');
+Route::get('/createdashboardpms', [ProjectManagementController::class, 'createDashboard'])->name('createdashboardpms');
+Route::post('/createdashboardpms', [ProjectManagementController::class, 'storeDashboard'])->name('storedashboardpms');
 
 /*MESSAGE*/
 Route::get('/datamessage',[MessageController::class, 'index'])->name('datamessage');
 Route::get('/createmessage',[MessageController::class, 'create'])->name('createmessage');
-Route::post('/simpanmessage',[MessageController::class, 'store'])->name('simpanmessage');
 Route::get('/editmessage/{id}',[MessageController::class, 'edit'])->name('editmessage');
 Route::post('/updatemessage/{id}',[MessageController::class, 'update'])->name('updatemessage');
-Route::get('/deletemessage/{id}',[MessageController::class, 'destroy'])->name('deletemessage');
+Route::delete('/deletemessage/{id}', [MessageController::class, 'destroy'])->name('deletemessage');
 Route::get('/showmessage/{id}',[MessageController::class, 'show'])->name('showmessage');
 Route::get('/change-status/{id}',[MessageController::class, 'changeStatus'])->name('changestatus');
 
@@ -188,6 +189,7 @@ Route::get('/landingpage',[LandingPageController::class, 'index'])->name('landin
 Route::get('/copyrightpage',[LandingPageController::class, 'copyrightpage'])->name('copyrightpage');
 Route::get('/privacypolicypage',[LandingPageController::class, 'privacypolicypage'])->name('privacypolicypage');
 Route::get('/termsofusepage',[LandingPageController::class, 'termsofusepage'])->name('termsofusepage');
+Route::get('/projectdetails',[LandingPageController::class, 'projectdetail'])->name('projectdetails');
 // Route::post('/store-form', [LandingPageController::class, 'store']);
 // Route::post('/dashboard', [LandingPageController::class, 'dashboard']);
 
@@ -209,10 +211,9 @@ Route::post('/mahasiswa/store',[MahasiswaController::class, 'store']);
 // Route::get('/change-status/{id}',[MessageController::class, 'changeStatus'])->name('changestatus');
 
 
-Route::get('add-blog-post-form', [MessageController::class, 'index']);
-// Route::get('dashboard', [MessageController::class, 'dashboard']);
-Route::post('store-form', [MessageController::class, 'store']);
-Route::get('/deletemessage/{id}',[MessageController::class, 'destroy'])->name('deletemessage');
+// Route::get('add-blog-post-form', [MessageController::class, 'index']);
+// // Route::get('dashboard', [MessageController::class, 'dashboard']);
+// Route::post('store-form', [MessageController::class, 'store']);
 
 /*USER MANAGEMENT*/
 Route::get('/datausermanagement',[UserManagementController::class, 'index'])->name('datausermanagement');
@@ -229,12 +230,8 @@ Route::get('/createportallogin',[PortalLoginController::class, 'create'])->name(
 Route::post('/simpanportallogin',[PortalLoginController::class, 'store'])->name('simpanportallogin');
 Route::get('/editportallogin/{id}',[PortalLoginController::class, 'edit'])->name('editportallogin');
 Route::post('/updateportallogin/{id}',[PortalLoginController::class, 'update'])->name('updateportallogin');
-Route::get('/deleteportallogin/{id}',[PortalLoginController::class, 'destroy'])->name('deleteportallogin');
+Route::delete('/deleteportallogin/{id}', [PortalLoginController::class, 'destroy'])->name('deleteportallogin');
 
 
 Route::get('/logindestination',[LoginDestinationController::class, 'index'])->name('logindestination');
 
-Route::get('/login',[LoginController::class, 'dinamis'])->name('login');
-Route::get('/copyrightpage2',[LoginController::class, 'copyrightpage'])->name('copyrightpage2');
-Route::get('/privacypolicypage2',[LoginController::class, 'privacypolicypage'])->name('privacypolicypage2');
-Route::get('/termsofusepage2',[LoginController::class, 'termsofusepage'])->name('termsofusepage2');

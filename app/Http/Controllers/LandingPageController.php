@@ -50,6 +50,12 @@ class LandingPageController extends Controller
         return view('termsofuse-page',compact('dataFooter'));
     }
 
+    public function projectdetail()
+    {
+        $dataProject = ProjectPage::all();
+        return view('projectpage-details',compact('dataProject'));
+    }
+
     // public function dashboard()
     // {
     //     return view('landing-page');

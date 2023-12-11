@@ -37,6 +37,10 @@
                       <label for="exampleInputEmail1" class="form-label">Project Description</label>
                       <input type="text" id="projectdescritpion" name="projectdescription" class="form-control" value="{{ $dt->projectdescription }}">
                      </div>
+                     {{-- <div class="form-group">
+                      <label for="exampleInputEmail1" class="form-label">Project Detail</label>
+                      <input type="text" id="projectdetails" name="projectdetails" class="form-control" value="{{ $dt->projectdetails }}">
+                     </div> --}}
                      <div class="form-group">
                       <label for="exampleInputEmail1" class="form-label">Project image</label>
                       <input type="file" id="projectimage" name="projectimage" class="form-control" value="{{ $dt->projectimage }}">
