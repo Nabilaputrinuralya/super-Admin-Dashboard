@@ -52,7 +52,7 @@ class NavbarController extends Controller
         $nm->move(public_path().'/navbarimg', $namaFile);
         $dtUpload->save();
 
-        return redirect('datanavbar')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('datanavbar')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -100,7 +100,7 @@ class NavbarController extends Controller
         ];
         $request->websitelogo->move(public_path().'/navbarimg', $awal);
         $ubah->update($dt);
-        return redirect('datanavbar')->with('success', 'Data Berhasil Di update!');
+        return redirect('datanavbar')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -119,7 +119,7 @@ class NavbarController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

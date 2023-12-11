@@ -66,9 +66,9 @@
                       @endif
                         </td>
                         <td>
-                        <a href="{{ url('deletemessage',$item->id) }}" class="btn btn-danger">
-                          <i class="fas fa-trash-alt"></i>Delete
-                        </a>
+                          <a href="{{ url('deletemessage',$item->id) }}" class="btn btn-danger" data-confirm-delete="true">
+                            <i class="fas fa-trash-alt"></i>Delete
+                          </a>
                       </td>
                      </tr>
                      @endforeach

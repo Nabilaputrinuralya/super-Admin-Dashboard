@@ -49,7 +49,7 @@
                               <a href="{{ url('editportallogin',$item->id) }}" class="btn btn-primary">
                                 <i class="fas fa-edit"></i>&nbsp;Edit</i>
                               </a>
-                              <a href="{{ url('deleteportallogin',$item->id) }}" class="btn btn-danger">
+                              <a href="{{ url('deleteportallogin',$item->id) }}" class="btn btn-danger" data-confirm-delete="true">
                                 <i class="fas fa-trash-alt"></i>&nbsp;Delete</i>
                               </a>
                             </td>    

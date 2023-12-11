@@ -65,7 +65,7 @@ class ContactUsController extends Controller
         
         $dtUpload->save();
 
-        return redirect('datacontact')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('datacontact')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -84,7 +84,7 @@ class ContactUsController extends Controller
         
         $dtUpload->save();
 
-        return redirect('datacontact')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('datacontact')->with('success', 'Data Updated Successfully!');
 
 
     }
@@ -144,7 +144,7 @@ class ContactUsController extends Controller
 
         ];
         $ubah->update($dt);
-        return redirect('datacontact')->with('success', 'Data Berhasil Di update!');
+        return redirect('datacontact')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -161,7 +161,7 @@ class ContactUsController extends Controller
             
         ];
         $ubah->update($dt);
-        return redirect('datacontact')->with('success', 'Data Berhasil Di update!');
+        return redirect('datacontact')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -174,7 +174,7 @@ class ContactUsController extends Controller
         
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
 
@@ -186,7 +186,7 @@ class ContactUsController extends Controller
         $delete = ContactUsCard2::findorfail($id);
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

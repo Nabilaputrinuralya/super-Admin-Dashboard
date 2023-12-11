@@ -49,7 +49,7 @@ class FooterController extends Controller
         $nm->move(public_path().'/footerimg', $namaFile);
         $dtUpload->save();
 
-        return redirect('datafooter')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('datafooter')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -119,7 +119,7 @@ class FooterController extends Controller
         }
     
         $ubah->update($dt);
-        return redirect('datafooter')->with('success', 'Data Berhasil Di update!');
+        return redirect('datafooter')->with('success', 'Data Updated Successfully!');
     }
 
     /**
@@ -137,7 +137,7 @@ class FooterController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

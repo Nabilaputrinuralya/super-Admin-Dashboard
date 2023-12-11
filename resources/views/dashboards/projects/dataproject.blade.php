@@ -31,6 +31,7 @@
                       <th>No</th>
                       <th>Project Name</th>
                       <th>Project Description</th>
+                      {{-- <th>Project Detail</th> --}}
                       <th>Project Image</th>
                       <th>Actions</th>
                     </tr>
@@ -44,6 +45,7 @@
                             <th scope="item">{{ $no++}}</th>
                             <td>{{ $item->projectname }}</td>
                             <td>{{ $item->projectdescription }}</td>
+                            {{-- <td>{{ $item->projectdetails }}</td> --}}
                             <td>
                                 <img src="{{asset('projectimg/'.$item->projectimage)}}" width="200px" alt="" srcset="">
                             </td>
@@ -54,9 +56,9 @@
                            </a>
                            {{-- <br/>
                            <br/> --}}
-                             <a href="{{ url('deleteproject',$item->id) }}" class="btn btn-danger" id="delete">
-                               <i class="fas fa-trash-alt"></i>&nbsp;Delete</i>
-                             </a>
+                           <a href="{{ url('deleteproject',$item->id) }}" class="btn btn-danger" data-confirm-delete="true">
+                            <i class="fas fa-trash-alt"></i>&nbsp;Delete
+                          </a>
                            </td>      
                         </tr>
                         @endforeach

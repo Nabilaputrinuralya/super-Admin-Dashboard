@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectPage extends Model
 {
     use HasFactory;
-    protected $table = "project_pages";
+    protected $table = "projectpage";
     protected $primaryKey = "id";
     protected $fillable = [
         'id','projectname','projectdescription','projectimage'];

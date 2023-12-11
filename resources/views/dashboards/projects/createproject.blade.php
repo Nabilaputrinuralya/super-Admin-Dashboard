@@ -43,6 +43,13 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                    </div>
+                   {{-- <div class="form-group">
+                    <label for="exampleInputEmail1" class="form-label">Project Detail</label>
+                    <input type="text" id="projectdetails" name="projectdetails" class="form-control">
+                    @error('projectdetails')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                   </div> --}}
                    <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label">Project image</label>
                     <input type="file" id="projectimage" name="projectimage" class="form-control">

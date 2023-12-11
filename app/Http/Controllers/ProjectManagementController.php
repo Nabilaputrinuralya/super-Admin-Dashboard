@@ -20,6 +20,9 @@ class ProjectManagementController extends Controller
     public function index(Request $request)
     {
         $dataPms = ProjectManagement::all();
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('dashboards.projectmanagements.dataprojectmanagement',compact('dataPms'));
     }
 
@@ -62,7 +65,7 @@ class ProjectManagementController extends Controller
     $q->projectdeadline = $projectdeadline;
     $q->save();
 
-    return redirect('dataprojectmanagement')->with('success', 'Data Berhasil Tersimpan!');
+    return redirect('dataprojectmanagement')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -103,7 +106,7 @@ class ProjectManagementController extends Controller
 
         ];
         $ubah->update($dt);
-        return redirect('dataprojectmanagement')->with('success', 'Data Berhasil Di update!');
+        return redirect('dataprojectmanagement')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -116,7 +119,7 @@ class ProjectManagementController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

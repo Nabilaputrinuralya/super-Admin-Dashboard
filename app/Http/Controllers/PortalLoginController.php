@@ -18,6 +18,10 @@ class PortalLoginController extends Controller
     public function index(Request $request)
     {
         $dataPortalLogin = PortalLogin::all();
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view('dashboards.portallogins.dataportallogin',compact('dataPortalLogin'));
     }
 
@@ -52,7 +56,8 @@ class PortalLoginController extends Controller
 
         $dtUpload->save();
 
-        return redirect('dataportallogin')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('dataportallogin')->with('success', 'Data Changed Successfully!');
+
 
 
     }
@@ -91,7 +96,7 @@ class PortalLoginController extends Controller
 
         ];
         $ubah->update($dt);
-        return redirect('dataportallogin')->with('success', 'Data Berhasil Di update!');
+        return redirect('dataportallogin')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -104,7 +109,7 @@ class PortalLoginController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

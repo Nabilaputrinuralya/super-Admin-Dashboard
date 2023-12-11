@@ -64,9 +64,7 @@ class HomeController extends Controller
             $message->websiteimage = $request->file('websiteimage')->getClientOriginalName();
             $message->save();
         }
-
-       
-        return redirect('datahome');
+        return redirect('datahome')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -140,7 +138,7 @@ class HomeController extends Controller
 
     $message->save();
 
-    return redirect('/datahome');
+    return redirect('datahome')->with('success', 'Data Updated Successfully!');
 }
 
 
@@ -153,7 +151,8 @@ class HomeController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
+
 
     }
 

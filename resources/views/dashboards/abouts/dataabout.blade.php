@@ -82,7 +82,7 @@
                             </a>
                             {{-- <br/>
                             <br/> --}}
-                              <a href="{{ url('deleteaboutteam',$item->id) }}" class="btn btn-danger" id="delete">
+                            <a href="{{ url('deleteaboutteam',$item->id) }}" class="btn btn-danger" data-confirm-delete="true">
                                 <i class="fas fa-trash-alt"></i>Delete</i>
                               </a>
                             </td>    

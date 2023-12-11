@@ -22,13 +22,13 @@
                                 <div class="dropdown">
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle myInput mt-2 left-text" type="button" id="emailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Choose Project <i class="fas fa-caret-down" style="color: #ffffff;"></i>
+                                            Choose Project <i class="fas fa-caret-down"></i>
                                           </button>
                                           <div class="dropdown-menu" aria-labelledby="emailDropdown">
                                             <!-- Add your email options here -->
                                             @foreach($dataPortalLogin as $item)
                                             <a class="dropdown-item dropdowntext" href="{{ $item->projectlink }}">{{ $item->projectname }}</a>
-                                            @endforeach
+                                            <a href="{{ redirect()->to('http://127.0.0.1:8000')->getTargetUrl() }}">Click This</a>                                            @endforeach
                                           </div>
                                 </div>
                             </div>
