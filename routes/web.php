@@ -37,7 +37,7 @@ use App\Http\Controllers\ContactUsSendMessageController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('landingpage');
 });
 
 Route::get('/landingpage', [NavbarController::class, 'index'])->name('landingpage');

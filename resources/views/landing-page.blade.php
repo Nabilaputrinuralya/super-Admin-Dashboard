@@ -75,7 +75,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <li class="scroll-to-section"><a href="#projectspage">Projects</a></li>
               <li class="scroll-to-section"><a href="#contactuspage">Contact Us</a></li>
             </ul>
-            <a href="http://127.0.0.1:8000/logindestination" class="action_btn" id="form-open">LOGIN</a>    
+            <a href="{{ route('logindestination') }}" class="action_btn" id="form-open">LOGIN</a>    
             <a class='menu-trigger'>
                 <span>Menu</span>
             </a>
