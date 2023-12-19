@@ -10,7 +10,12 @@ class MessageController extends Controller
     public function index()
     {
         $post = Message::all();
-        return view('dashboards.messages.datamessage',compact('post'));
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view('dashboards.Message.datamessage',compact('post'));
+
+        
     }
     public function store(Request $request)
     {
@@ -22,6 +27,7 @@ class MessageController extends Controller
         $post->message = $request->message;
         $post->save();
         return redirect('landingpage')->with('status', 'Blog Post Form Data Has Been inserted');
+        
     }
     // change status 
      public function changeStatus($id){
@@ -50,7 +56,7 @@ class MessageController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
 

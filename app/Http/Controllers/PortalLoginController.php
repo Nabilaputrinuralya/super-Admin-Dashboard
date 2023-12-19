@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class PortalLoginController extends Controller
 {
-    function db(){
+    function layout(){
         
-        return view('dashboards.portallogins.index');
+        return view('dashboards.PortalLogin.indexportallogin');
     } 
 
     /**
@@ -18,7 +18,11 @@ class PortalLoginController extends Controller
     public function index(Request $request)
     {
         $dataPortalLogin = PortalLogin::all();
-        return view('dashboards.portallogins.dataportallogin',compact('dataPortalLogin'));
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
+        return view('dashboards.PortalLogin.dataportallogin',compact('dataPortalLogin'));
     }
 
     /**
@@ -26,7 +30,7 @@ class PortalLoginController extends Controller
      */
     public function create()
     {
-        return view('dashboards.portallogins.createportallogin');
+        return view('dashboards.PortalLogin.createportallogin');
     }
 
     /**
@@ -52,7 +56,8 @@ class PortalLoginController extends Controller
 
         $dtUpload->save();
 
-        return redirect('dataportallogin')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('dataportallogin')->with('success', 'Data Changed Successfully!');
+
 
 
     }
@@ -75,7 +80,7 @@ class PortalLoginController extends Controller
     public function edit($id)
     {
         $dt = PortalLogin::findorfail($id);
-        return view('dashboards.portallogins.editportallogin',compact('dt'));
+        return view('dashboards.PortalLogin.editportallogin',compact('dt'));
     }
 
     /**
@@ -91,7 +96,7 @@ class PortalLoginController extends Controller
 
         ];
         $ubah->update($dt);
-        return redirect('dataportallogin')->with('success', 'Data Berhasil Di update!');
+        return redirect('dataportallogin')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -104,7 +109,7 @@ class PortalLoginController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

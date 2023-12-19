@@ -7,16 +7,13 @@ use Illuminate\Http\Request;
 
 class NavbarController extends Controller
 {
-    public function lp(){
-        
-        return view('dashboards.navbars.lp');
-    } 
-    
-
-    public function db(){
-        
-        return view('dashboards.navbars.index');
-    } 
+   /**
+     * Display a listing of the resource.
+     */
+    public function layout()
+    {
+        return view('dashboards.Navbar.index');
+    }
     
 
     /**
@@ -25,7 +22,7 @@ class NavbarController extends Controller
     public function index(Request $request)
     {
         $dataNavbar = Navbar::all();
-        return view('dashboards.navbars.datanavbar',compact('dataNavbar'));
+        return view('dashboards.Navbar.datanavbar',compact('dataNavbar'));
     }
 
     /**
@@ -33,7 +30,7 @@ class NavbarController extends Controller
      */
     public function create()
     {
-        return view('dashboards.navbars.createnavbar');
+        return view('dashboards.Navbar.createnavbar');
     }
 
     /**
@@ -49,10 +46,10 @@ class NavbarController extends Controller
         $dtUpload->websitelogo = $namaFile;
         
 
-        $nm->move(public_path().'/navbarimg', $namaFile);
+        $nm->move(public_path().'/NavbarImages', $namaFile);
         $dtUpload->save();
 
-        return redirect('datanavbar')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('datanavbar')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -62,11 +59,7 @@ class NavbarController extends Controller
      */
     public function show(string $id)
     {
-        //get post by ID
-        $navbarpage = Navbar::findOrFail($id);
-
-        //render view with post
-        return view('dashboards.navbars.shownavbar', compact('navbarpage'));
+        
     }
 
     /**
@@ -75,7 +68,7 @@ class NavbarController extends Controller
     public function edit($id)
     {
         $dt = Navbar::findorfail($id);
-        return view('dashboards.navbars.editnavbar',compact('dt'));
+        return view('dashboards.Navbar.editnavbar',compact('dt'));
     }
 
     /**
@@ -98,9 +91,9 @@ class NavbarController extends Controller
             'websitelogo' => $awal,
 
         ];
-        $request->websitelogo->move(public_path().'/navbarimg', $awal);
+        $request->websitelogo->move(public_path().'/NavbarImages', $awal);
         $ubah->update($dt);
-        return redirect('datanavbar')->with('success', 'Data Berhasil Di update!');
+        return redirect('datanavbar')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -111,7 +104,7 @@ class NavbarController extends Controller
     {
         $delete = Navbar::findorfail($id);
 
-        $file = public_path('/navbarimg/').$delete->websitelogo;
+        $file = public_path('/NavbarImages/').$delete->websitelogo;
         //cek jika ada gambar
         if(file_exists($file)){
             //maka hapus file folder public /img
@@ -119,7 +112,7 @@ class NavbarController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

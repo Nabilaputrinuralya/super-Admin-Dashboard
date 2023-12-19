@@ -6,11 +6,13 @@ use App\Models\Home;
 use App\Models\Footer;
 use App\Models\Navbar;
 use App\Models\AboutTeam;
-use App\Models\ProjectPage;
+use App\Models\OurProject;
+use App\Models\AboutUsTeam;
 use Illuminate\Http\Request;
 use App\Models\ContactUsCard1;
 use App\Models\ContactUsCard2;
 use App\Models\AboutDescription;
+use App\Models\AboutUsDescription;
 use App\Models\ContactUsSendMessage;
 
 class LandingPageController extends Controller
@@ -22,9 +24,9 @@ class LandingPageController extends Controller
     {
         $dataNavbar = Navbar::all();
         $dataHome = Home::all();
-        $dataAboutTeam = AboutTeam::all();
-        $dataAboutDescription = AboutDescription::all();
-        $dataProject = ProjectPage::all();
+        $dataAboutTeam = AboutUsTeam::all();
+        $dataAboutDescription = AboutUsDescription::all();
+        $dataProject = OurProject::all();
         $dataContactCard1 = ContactUsCard1::all();
         $dataContactCard2 = ContactUsCard2::all();
         $dataFooter = Footer::all();
@@ -35,19 +37,22 @@ class LandingPageController extends Controller
     public function copyrightpage()
     {
         $dataFooter = Footer::all();
-        return view('copyright-page',compact('dataFooter'));
+        $dataNavbar = Navbar::all();
+        return view('copyright-page',compact('dataFooter','dataNavbar'));
     }
 
     public function privacypolicypage()
     {
         $dataFooter = Footer::all();
-        return view('privacypolicy-page',compact('dataFooter'));
+        $dataNavbar = Navbar::all();
+        return view('privacypolicy-page',compact('dataFooter','dataNavbar'));
     }
 
     public function termsofusepage()
     {
         $dataFooter = Footer::all();
-        return view('termsofuse-page',compact('dataFooter'));
+        $dataNavbar = Navbar::all();
+        return view('termsofuse-page',compact('dataFooter','dataNavbar'));
     }
 
     // public function dashboard()

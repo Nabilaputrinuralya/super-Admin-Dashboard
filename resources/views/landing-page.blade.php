@@ -20,6 +20,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
 
 <!--
 
@@ -64,7 +65,7 @@ https://templatemo.com/tm-570-chain-app-dev
             <!-- ***** Logo Start ***** -->
             <a href="#homepage" class="logo">
               @foreach($dataNavbar as $item)
-              <img src="{{asset('navbarimg/'.$item->websitelogo)}}" alt="Logo ProKing Indonesia" srcset="">
+              <img src="{{asset('NavbarImages/'.$item->websitelogo)}}" alt="Logo ProKing Indonesia" srcset="">
               @endforeach
             </a>
             <!-- ***** Logo End ***** -->
@@ -149,7 +150,7 @@ https://templatemo.com/tm-570-chain-app-dev
                   <div class="row">
                     <div class="col-lg-12">
                       @foreach($dataHome as $item)
-                      <img src="{{asset('homeimg/'.$item->websiteimage)}}"  alt="Ilustration ProKing Indonesia" srcset="">
+                      <img src="{{asset('HomeImages/'.$item->websiteimage)}}"  alt="Ilustration ProKing Indonesia" srcset="">
                     </div>
                   </div>
                 </div>
@@ -158,7 +159,7 @@ https://templatemo.com/tm-570-chain-app-dev
                 <div class="left-content show-up header-text" data-wow-duration="1s" data-wow-delay="1s">
                   <div class="col-lg-12">
                     <h2><center>{{ $item->greetingsword }}</center></h2>
-                    <img src="{{asset('homeimg/'.$item->websitelogo)}}" alt="Logo ProKing Indonesia" srcset="">
+                    <img src="{{asset('HomeImages/'.$item->websitelogo)}}" alt="Logo ProKing Indonesia" srcset="">
                     <p>{{ $item->websitedescription }}</p>
                     @endforeach
                   </div>
@@ -189,7 +190,7 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="col-lg-4 mb-5">
             <div class="team-member">
               @foreach($dataAboutTeam as $item)
-              <img class="mx-auto rounded-circle" src="{{asset('aboutimg/'.$item->profilepicture)}}" alt="Logo ProKing Indonesia" srcset="">
+              <img class="mx-auto rounded-circle" src="{{asset('AboutUsImages/'.$item->profilepicture)}}" alt="Logo ProKing Indonesia" srcset="">
               <h4>{{ $item->fullname }}</h4>
               <p class="text-muted">{{ $item->jobposition }}</p>
               <ul>
@@ -233,10 +234,10 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="card-wrapper swiper-wrapper">
             @foreach($dataProject as $item)
             <div class="card swiper-slide">
-              <img src="{{asset('projectimg/'.$item->projectimage)}}"  class="card-img-top" alt="Project Image 1" srcset="">
+              <img src="{{asset('OurProjectImages/'.$item->projectimage)}}"  class="card-img-top" alt="Project Image 1" srcset="">
               <div class="card-body">
                 <h4 class="card-title"><a href="#">{{ $item->projectname }}</a></h4>
-                <button class="action_btn">DETAILS</button>
+                <a href="{{ route('visit') }}" onclick="tampilkanRincianProyek('${item.projectname}', '${item.projectdescription}')" class="action_btn">VISIT</a>
               </div>
               <p class="card-text">{{ $item->projectdescription }}</p>
             </div>
@@ -367,7 +368,7 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="footer-widget" class="scroll-to-section">
             <a href="#homepage" class="logo">
               @foreach($dataFooter as $item)
-              <img src="{{asset('footerimg/'.$item->websitelogo)}}" alt="Logo ProKing Indonesia" srcset="">
+              <img src="{{asset('FooterImages/'.$item->websitelogo)}}" alt="Logo ProKing Indonesia" srcset="">
             </a> 
           </div>
         </div>
@@ -417,6 +418,19 @@ https://templatemo.com/tm-570-chain-app-dev
   <script src="{{ asset('assets/js/login.js') }}"></script>
 
   <script>
+   
+    $(document).ready(function() {
+    $('#add-blog-post-form').submit(function(e) {
+      e.preventDefault();
+      // Logika pemrosesan formulir Anda di sini
+
+      // Tampilkan alert setelah pengiriman formulir
+      alert("Message Sent Successfully!");
+    });
+  });
+
+  
+  
     $(document).ready(function() {
       $('.select-btn').click(function() {
         $('.options').toggleClass('active');

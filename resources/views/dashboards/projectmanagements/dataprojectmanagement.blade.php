@@ -53,7 +53,7 @@
                               <a href="{{ url('editprojectmanagement',$item->id) }}" class="btn btn-primary">
                                 <i class="fas fa-edit"></i>&nbsp;Edit</i>
                               </a>
-                              <a href="{{ url('deleteprojectmanagement',$item->id) }}" class="btn btn-danger">
+                              <a href="{{ url('deleteprojectmanagement',$item->id) }}" class="btn btn-danger" data-confirm-delete="true">
                                 <i class="fas fa-trash-alt"></i>&nbsp;Delete</i>
                               </a>
                             </td>    

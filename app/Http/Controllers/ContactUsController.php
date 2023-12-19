@@ -12,7 +12,7 @@ class ContactUsController extends Controller
 {
     function db(){
         
-        return view('dashboards.contacts.indexcontact');
+        return view('dashboards.ContactUs.indexcontactus');
     } 
 
     /**
@@ -22,7 +22,7 @@ class ContactUsController extends Controller
     {
         $dataContactCard1 = ContactUsCard1::all();
         $dataContactCard2 = ContactUsCard2::all();
-        return view('dashboards.contacts.datacontact',compact('dataContactCard1','dataContactCard2'));
+        return view('dashboards.ContactUs.datacontactus',compact('dataContactCard1','dataContactCard2'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ContactUsController extends Controller
      */
     public function create()
     {
-        return view('dashboards.contacts.createcontactcard1');
+        return view('dashboards.ContactUs.createcontactuscard1');
     }
     
 
@@ -39,7 +39,7 @@ class ContactUsController extends Controller
      */
     public function createcard2()
     {
-        return view('dashboards.contacts.createcontactcard2');
+        return view('dashboards.ContactUs.createcontactcard2');
     }
 
     /**
@@ -65,7 +65,7 @@ class ContactUsController extends Controller
         
         $dtUpload->save();
 
-        return redirect('datacontact')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('datacontactus')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -84,7 +84,7 @@ class ContactUsController extends Controller
         
         $dtUpload->save();
 
-        return redirect('datacontact')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('datacontactus')->with('success', 'Data Updated Successfully!');
 
 
     }
@@ -109,7 +109,7 @@ class ContactUsController extends Controller
     public function edit($id)
     {
         $dt = ContactUsCard1::findorfail($id);
-        return view('dashboards.contacts.editcontactcard1',compact('dt'));
+        return view('dashboards.ContactUs.editcontactuscard1',compact('dt'));
     }
 
     /**
@@ -118,7 +118,7 @@ class ContactUsController extends Controller
     public function editcard2($id)
     {
         $dt = ContactUsCard2::findorfail($id);
-        return view('dashboards.contacts.editcontactcard2',compact('dt'));
+        return view('dashboards.ContactUs.editcontactuscard2',compact('dt'));
     }
 
    
@@ -144,7 +144,7 @@ class ContactUsController extends Controller
 
         ];
         $ubah->update($dt);
-        return redirect('datacontact')->with('success', 'Data Berhasil Di update!');
+        return redirect('datacontactus')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -161,7 +161,7 @@ class ContactUsController extends Controller
             
         ];
         $ubah->update($dt);
-        return redirect('datacontact')->with('success', 'Data Berhasil Di update!');
+        return redirect('datacontactus')->with('success', 'Data Updated Successfully!');
         
     }
 
@@ -174,7 +174,7 @@ class ContactUsController extends Controller
         
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
 
@@ -186,7 +186,7 @@ class ContactUsController extends Controller
         $delete = ContactUsCard2::findorfail($id);
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

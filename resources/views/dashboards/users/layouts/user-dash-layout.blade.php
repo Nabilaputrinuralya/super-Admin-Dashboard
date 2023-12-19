@@ -21,6 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/button.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
@@ -39,16 +40,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a class="nav-link" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-        </a>
+     <!-- Right navbar links -->
+     <a class="nav-link logout-button" href="http://127.0.0.1:8000/landingpage">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
 
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
+
       </li>
     </ul>
 
@@ -123,19 +120,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('dataabout')}}" class="nav-link {{ (request()->is('dataabout*')) ? 'active' : '' }}">
+                    <a href="{{ route('dataaboutus')}}" class="nav-link {{ (request()->is('dataaboutus*')) ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>About Us Page</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('dataproject')}}" class="nav-link {{ (request()->is('dataproject*')) ? 'active' : '' }}">
+                    <a href="{{ route('dataourproject')}}" class="nav-link {{ (request()->is('dataourproject*')) ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Our Projects Page</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('datacontact')}}" class="nav-link {{ (request()->is('datacontact*')) ? 'active' : '' }}">
+                    <a href="{{ route('datacontactus')}}" class="nav-link {{ (request()->is('datacontactus*')) ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Contact Us Page</p>
                     </a>
@@ -150,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-folder-open"></i>
+                  <i class="nav-icon fas fa-project-diagram"></i>
                   <p>
                     Project Management
                     <i class="fas fa-angle-left right"></i>
@@ -164,22 +161,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('datahome')}}" class="nav-link {{ (request()->is('datahome*')) ? 'active' : '' }}">
+                    <a href="{{ route('dataportallogin')}}" class="nav-link {{ (request()->is('dataportallogin*')) ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Portal Login</p>
                     </a>
                   </li>
                 </ul>
               </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('datausermanagement')}}" class="nav-link {{ (request()->is('datausermanagement*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-user"></i> 
               <p>User Management</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('datamessage')}}" class="nav-link {{ (request()->is('datamessage*')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-envelope"></i>
+              <i class="nav-icon fas fa-comments"></i>
               <p>Message Management</p>
             </a>
           </li>
@@ -210,12 +207,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Anything you want
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2023 <a href="http://127.0.0.1:8000/landingpage">ProKing Indonesia</a>.</strong> All rights reserved.
   </footer>
 </div>
+@include('sweetalert::alert')
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
@@ -225,7 +222,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -394,38 +390,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
   });
 
-  $(function(){
-    $(document).on('click', '#delete', function(e){
-      e.preventDefault();
-      var link = $(this).attr("href");
-
-      Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, delete it!"
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire({
-      title: "Deleted!",
-      text: "Your file has been deleted.",
-      icon: "success"
-    });
-  }
-});
-    });
-  });
-
   // NAVBAR
 
   $(document).on('click','#change_picture_navbar', function(){
       $('#navbar_image').click();
 
     });
-    
 
 </script>
 </body>

@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class FooterController extends Controller
 {
-    function db(){
+    function layout(){
         
-        return view('dashboards.footers.index');
+        return view('dashboards.Footer.indexfooter');
     } 
 
     /**
@@ -18,7 +18,7 @@ class FooterController extends Controller
     public function index(Request $request)
     {
         $dataFooter = Footer::all();
-        return view('dashboards.footers.datafooter',compact('dataFooter'));
+        return view('dashboards.Footer.datafooter',compact('dataFooter'));
     }
 
     /**
@@ -26,7 +26,7 @@ class FooterController extends Controller
      */
     public function create()
     {
-        return view('dashboards.footers.createfooter');
+        return view('dashboards.Footer.createfooter');
     }
 
     /**
@@ -46,10 +46,10 @@ class FooterController extends Controller
         $dtUpload->termsofusepage = $request->termsofusepage;
         $dtUpload->copyright = $request->copyright;
 
-        $nm->move(public_path().'/footerimg', $namaFile);
+        $nm->move(public_path().'/FooterImages', $namaFile);
         $dtUpload->save();
 
-        return redirect('datafooter')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('datafooter')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -59,11 +59,7 @@ class FooterController extends Controller
      */
     public function show(string $id)
     {
-        // //get post by ID
-        $footerpage = Footer::findOrFail($id);
-
-        // //render view with post
-        return view('dashboards.footers.showfooter', compact('footerpage'));
+        //
     }
 
     /**
@@ -72,7 +68,7 @@ class FooterController extends Controller
     public function edit($id)
     {
         $dt = Footer::findorfail($id);
-        return view('dashboards.footers.editfooter',compact('dt'));
+        return view('dashboards.Footer.editfooter',compact('dt'));
     }
 
     /**
@@ -95,13 +91,13 @@ class FooterController extends Controller
             // Proses penyimpanan file gambar
             $nm = $request->websitelogo;
             $namaFile = $nm->getClientOriginalName();
-            $nm->move(public_path().'/footerimg ', $namaFile);
+            $nm->move(public_path().'/FooterImages ', $namaFile);
     
             // Update data dengan file gambar baru
             $dt = [
                 'locationaddress' => $request['locationaddress'],
                 'copyrightpage' => $request['copyrightpage'],
-                'privacypolicypage' => $request['copyrightpage'],
+                'privacypolicypage' => $request['privacypolicypage'],
                 'termofusepage' => $request['termofusepage'],
                 'copyright' => $request['copyright'],
                 'websitelogo' => $namaFile,
@@ -111,7 +107,7 @@ class FooterController extends Controller
             $dt = [
                 'locationaddress' => $request['locationaddress'],
                 'copyrightpage' => $request['copyrightpage'],
-                'privacypolicypage' => $request['copyrightpage'],
+                'privacypolicypage' => $request['privacypolicypage'],
                 'termofusepage' => $request['termofusepage'],
                 'copyright' => $request['copyright'],
                 
@@ -119,7 +115,7 @@ class FooterController extends Controller
         }
     
         $ubah->update($dt);
-        return redirect('datafooter')->with('success', 'Data Berhasil Di update!');
+        return redirect('datafooter')->with('success', 'Data Updated Successfully!');
     }
 
     /**
@@ -129,7 +125,7 @@ class FooterController extends Controller
     {
         $delete = footer::findorfail($id);
 
-        $file = public_path('/footerimg/').$delete->websitelogo;
+        $file = public_path('/FooterImages/').$delete->websitelogo;
         //cek jika ada gambar
         if(file_exists($file)){
             //maka hapus file folder public /img
@@ -137,7 +133,7 @@ class FooterController extends Controller
         }
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
 
     }
     

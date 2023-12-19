@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     
-    function db(){
+    function layout(){
         
-        return view('dashboards.homes.indexhome');
+        return view('dashboards.Home.indexhome');
     } 
 
     /**
@@ -20,7 +20,7 @@ class HomeController extends Controller
     {
         
         $dataHome = Home::all();
-        return view('dashboards.homes.datahome',compact('dataHome'));
+        return view('dashboards.Home.datahome',compact('dataHome'));
     }
 
     /**
@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        return view('dashboards.homes.createhome');
+        return view('dashboards.Home.createhome');
     }
 
     /**
@@ -37,36 +37,33 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'websitelogo'  => 'required',
             'websiteimage'    => 'required',
+            'websitelogo'  => 'required',
             'greetingsword'  => 'required',
-            'websitedescription'      => 'required',
-            
-           
+            'websitedescription'      => 'required', 
         ]);
 
         Home::create([
-            'websitelogo'  => $request->websitelogo,
             'websiteimage'    => $request->websiteimage,
+            'websitelogo'  => $request->websitelogo,
             'greetingsword'  => $request->greetingsword,
             'websitedescription'      => $request->websitedescription,
            
         ]);
 
         $message = Home::create($request->all());
-        if($request->hasFile('websitelogo')) {
-            $request->file('websitelogo')->move('homeimg/',$request->file('websitelogo')->getClientOriginalName());
-            $message->websiteimage = $request->file('websitelogo')->getClientOriginalName();
-            $message->save();
-        }
         if($request->hasFile('websiteimage')) {
-            $request->file('websiteimage')->move('homeimg/',$request->file('websiteimage')->getClientOriginalName());
+            $request->file('websiteimage')->move('HomeImages/',$request->file('websiteimage')->getClientOriginalName());
             $message->websiteimage = $request->file('websiteimage')->getClientOriginalName();
             $message->save();
         }
 
-       
-        return redirect('datahome');
+        if($request->hasFile('websitelogo')) {
+            $request->file('websitelogo')->move('HomeImages/',$request->file('websitelogo')->getClientOriginalName());
+            $message->websiteimage = $request->file('websitelogo')->getClientOriginalName();
+            $message->save();
+        }
+        return redirect('datahome')->with('success', 'Data Changed Successfully!');
 
 
     }
@@ -76,11 +73,7 @@ class HomeController extends Controller
      */
     public function show(string $id)
     {
-        // //get post by ID
-        // $messagepage = Home::findOrFail($id);
-
-        // //render view with post
-        // return view('dashboards.homes.showmessage', compact('messagepage'));
+        
     }
 
     /**
@@ -89,7 +82,7 @@ class HomeController extends Controller
     public function edit($id)
     {
         $dt = Home::findorfail($id);
-        return view('dashboards.homes.edithome',compact('dt'));
+        return view('dashboards.Home.edithome',compact('dt'));
     }
 
     /**
@@ -99,13 +92,13 @@ class HomeController extends Controller
 {
     // Validasi form untuk file gambar
     $request->validate([
-        'websitelogo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'websiteimage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'websitelogo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ], [
-        'websitelogo.image' => 'The file must be an image.',
-        'websitelogo.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
         'websiteimage.image' => 'The file must be an image.',
         'websiteimage.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
+        'websitelogo.image' => 'The file must be an image.',
+        'websitelogo.mimes' => 'Image format must be jpeg, png, jpg, gif, or svg.',
     ]);
 
 
@@ -118,29 +111,29 @@ class HomeController extends Controller
     $message->greetingsword = $request->greetingsword;
     $message->websitedescription = $request->websitedescription;
 
+     // Check if a new image file is uploaded
+     if ($request->hasFile('websiteimage')) {
+        $request->validate([
+            'websiteimage' => 'required',
+        ]);
+
+        $request->file('websiteimage')->move('HomeImages/', $request->file('websiteimage')->getClientOriginalName());
+        $message->websiteimage = $request->file('websiteimage')->getClientOriginalName();
+    }
+
     // Check if a new logo file is uploaded
     if ($request->hasFile('websitelogo')) {
         $request->validate([
             'websitelogo' => 'required',
         ]);
 
-        $request->file('websitelogo')->move('homeimg/', $request->file('websitelogo')->getClientOriginalName());
+        $request->file('websitelogo')->move('HomeImages/', $request->file('websitelogo')->getClientOriginalName());
         $message->websitelogo = $request->file('websitelogo')->getClientOriginalName();
-    }
-
-    // Check if a new image file is uploaded
-    if ($request->hasFile('websiteimage')) {
-        $request->validate([
-            'websiteimage' => 'required',
-        ]);
-
-        $request->file('websiteimage')->move('homeimg/', $request->file('websiteimage')->getClientOriginalName());
-        $message->websiteimage = $request->file('websiteimage')->getClientOriginalName();
     }
 
     $message->save();
 
-    return redirect('/datahome');
+    return redirect('datahome')->with('success', 'Data Updated Successfully!');
 }
 
 
@@ -153,7 +146,8 @@ class HomeController extends Controller
 
         //hapus data di database
         $delete->delete();
-        return back()->with('info','Data berhasil dihapus');
+        return back()->with('info','Data Deleted Successfully');
+
 
     }
 

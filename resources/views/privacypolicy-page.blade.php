@@ -44,9 +44,9 @@ https://templatemo.com/tm-570-chain-app-dev
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="main.html" class="logo">
-              @foreach($dataFooter as $item)
-              <img src="{{asset('footerimg/'.$item->websitelogo)}}" alt="" width="200" height="60">
-            </a>
+              @foreach($dataNavbar as $item)
+              <img src="{{asset('NavbarImages/'.$item->websitelogo)}}" alt="" width="200" height="60">
+              @endforeach
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
@@ -68,8 +68,9 @@ https://templatemo.com/tm-570-chain-app-dev
     <div class="container">
         <div class="text-center">
             <br/>
-            <h2>Privacy Policy</h2>
+            <h2 class="mt-5">Privacy Policy</h2>
             <br/>
+            @foreach($dataFooter as $item)
             <h3 class="section-subheading">{{ $item->privacypolicypage }}</h3>
             <h3 class="section-subheading">{{ $item->privacypolicypage }}</h3>
             <h3 class="section-subheading">{{ $item->privacypolicypage }}</h3>
