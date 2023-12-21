@@ -8,12 +8,10 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Profil</h1>
+                <h1>ADD NEW MEMBER</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-                    <li class="breadcrumb-item active">Profil Pengguna</li>
                 </ol>
             </div>
         </div>
@@ -65,7 +63,12 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">Simpan data</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Save Data
+                              </button>
+                              <a href="{{ url('dataaboutus') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back
+                              </a>
                             </div>
                         </form>
                     </div>

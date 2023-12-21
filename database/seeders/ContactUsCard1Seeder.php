@@ -6,7 +6,7 @@ use App\Models\ContactUsCard1;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class ContacUsCard1Seeder extends Seeder
+class ContactUsCard1Seeder extends Seeder
 {
     public function run()
     {

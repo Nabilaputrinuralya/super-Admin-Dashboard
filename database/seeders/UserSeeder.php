@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
@@ -13,12 +14,18 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Super Admin',
-            'email' => 'superadmini@gmail.com', 
-            'phone' => '000000000000', 
-            'password' => bcrypt('superadmin123_'), // default password 'password' Default_Image
-            'picture' => 'Default_Image,png' 
-        ]);
+        if (User::count() === 0) {
+            User::create([
+                'name' => 'Nabila Putri', 
+                'email' => 'nabilaputri@gmail.com',
+                'role' => 1,
+                'phone' => '082115450690',
+                'picture' => 'Default_Image.png',
+                'password'=>Hash::make('superadmin123_'),
+                ]);
+            $this->command->info('Successfully seeding.');
+        } else {
+            $this->command->info('Users table is not empty. Skipping seeding');
+        }
     }
 }
