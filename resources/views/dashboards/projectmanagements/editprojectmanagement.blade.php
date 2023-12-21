@@ -27,7 +27,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-8">
-            <form action="{{ route('updateprojectmanagement') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('updateprojectmanagement', ['id' => $dt->id]) }}" method="post" enctype="multipart/form-data">
               @csrf
                    <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label">Project ID</label>

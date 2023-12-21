@@ -170,7 +170,7 @@ Route::get('/dataprojectmanagement',[ProjectManagementController::class, 'index'
 Route::get('/createprojectmanagement',[ProjectManagementController::class, 'create'])->name('createprojectmanagement');
 Route::post('/simpanprojectmanagement',[ProjectManagementController::class, 'store'])->name('simpanprojectmanagement');
 Route::get('/editprojectmanagement/{id}',[ProjectManagementController::class, 'edit'])->name('editprojectmanagement');
-Route::post('/updateprojectmanagement',[ProjectManagementController::class, 'update'])->name('updateprojectmanagement');
+Route::post('/updateprojectmanagement/{id}',[ProjectManagementController::class, 'update'])->name('updateprojectmanagement');
 Route::delete('/deleteprojectmanagement/{id}', [ProjectManagementController::class, 'destroy'])->name('deleteprojectmanagement');
 // Route::get('/showpms/{id}',[ProjectManagementController::class, 'show'])->name('showpms');
 Route::get('/createdashboardpms', [ProjectManagementController::class, 'createDashboard'])->name('createdashboardpms');
