@@ -237,7 +237,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <img src="{{asset('OurProjectImages/'.$item->projectimage)}}"  class="card-img-top" alt="Project Image 1" srcset="">
               <div class="card-body">
                 <h4 class="card-title"><a href="#">{{ $item->projectname }}</a></h4>
-                <a href="{{ route('visit') }}" onclick="tampilkanRincianProyek('${item.projectname}', '${item.projectdescription}')" class="action_btn">VISIT</a>
+                <a href="{{ route('projectdetail', $item->id) }}" class="action_btn">VISIT</a>
               </div>
               <p class="card-text">{{ $item->projectdescription }}</p>
             </div>

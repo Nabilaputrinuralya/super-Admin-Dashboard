@@ -1,7 +1,8 @@
-@extends('dashboards.projectmanagements.layouts.projectmanagement-dash-layout')
+@extends('dashboards.ProjectManagement.layouts.projectmanagement-dash-layout')
 @section('title','Dashboard')
 
 @section('content')
+
 
 <!-- Content Header (Page header) -->
 <section class="content-header">

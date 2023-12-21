@@ -5,23 +5,17 @@ use App\Models\NavbarPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\MessageController;
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\OurProjectController;
-use App\Http\Controllers\AboutUsPageController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PortalLoginController;
-use App\Http\Controllers\VisitButtonController;
-use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\LoginDestinationController;
 use App\Http\Controllers\ProjectManagementController;
 
@@ -173,9 +167,12 @@ Route::get('/dataprojectmanagement',[ProjectManagementController::class, 'index'
 Route::get('/createprojectmanagement',[ProjectManagementController::class, 'create'])->name('createprojectmanagement');
 Route::post('/simpanprojectmanagement',[ProjectManagementController::class, 'store'])->name('simpanprojectmanagement');
 Route::get('/editprojectmanagement/{id}',[ProjectManagementController::class, 'edit'])->name('editprojectmanagement');
-Route::post('/updateprojectmanagement',[ProjectManagementController::class, 'update'])->name('updateprojectmanagement');
+Route::post('/updateprojectmanagement/{id}',[ProjectManagementController::class, 'update'])->name('updateprojectmanagement');
 Route::delete('/deleteprojectmanagement/{id}', [ProjectManagementController::class, 'destroy'])->name('deleteprojectmanagement');
 // Route::get('/showpms/{id}',[ProjectManagementController::class, 'show'])->name('showpms');
+Route::get('/createdashboardpms', [ProjectManagementController::class, 'createDashboard'])->name('createdashboardpms');
+Route::post('/createdashboardpms', [ProjectManagementController::class, 'storeDashboard'])->name('storedashboardpms');
+
 
 /*MESSAGE*/
 Route::get('/datamessage',[MessageController::class, 'index'])->name('datamessage');
@@ -190,7 +187,7 @@ Route::get('/',[LandingPageController::class, 'index'])->name('landingpage');
 Route::get('/copyrightpage',[LandingPageController::class, 'copyrightpage'])->name('copyrightpage');
 Route::get('/privacypolicypage',[LandingPageController::class, 'privacypolicypage'])->name('privacypolicypage');
 Route::get('/termsofusepage',[LandingPageController::class, 'termsofusepage'])->name('termsofusepage');
-Route::get('/projectdetails/{id}', [LandingPageController::class, 'projectdetails'])->name('projectdetails');
+Route::get('/projectdetail/{id}', [LandingPageController::class, 'projectdetail'])->name('projectdetail');
 // Route::post('/store-form', [LandingPageController::class, 'store']);
 // Route::post('/dashboard', [LandingPageController::class, 'dashboard']);
 
@@ -219,5 +216,6 @@ Route::get('/projectdetails/{id}', [LandingPageController::class, 'projectdetail
 
 
 Route::get('/logindestination',[LoginDestinationController::class, 'index'])->name('logindestination');
-Route::get('/visit',[VisitButtonController::class, 'index'])->name('visit');
+
+Route::get('/login',[LoginController::class, 'index'])->name('login');
 

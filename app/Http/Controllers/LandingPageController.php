@@ -55,6 +55,14 @@ class LandingPageController extends Controller
         return view('termsofuse-page',compact('dataFooter','dataNavbar'));
     }
 
+    public function projectdetail($id)
+{
+    $dataNavbar = Navbar::all();
+    $dataOurProject = OurProject::find($id);
+    return view('projectdetail', compact('dataOurProject', 'dataNavbar'));
+}
+
+
     // public function dashboard()
     // {
     //     return view('landing-page');

@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
      <!-- Right navbar links -->
-     <a class="nav-link logout-button" href="http://127.0.0.1:8000/landingpage">
+     <a class="nav-link logout-button" href="http://127.0.0.1:8000/">
         <i class="fas fa-sign-out-alt"></i> Logout
       </a>
 
@@ -157,7 +157,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <li class="nav-item">
                     <a href="{{ route('dataprojectmanagement')}}" class="nav-link {{ (request()->is('dataprojectmanagement*')) ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Create New Project</p>
+                      <p>Create New Dashboard</p>
                     </a>
                   </li>
                   <li class="nav-item">
