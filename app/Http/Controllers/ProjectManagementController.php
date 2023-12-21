@@ -66,8 +66,6 @@ class ProjectManagementController extends Controller
     $q->save();
 
     return redirect('dataprojectmanagement')->with('success', 'Data Changed Successfully!');
-
-
     }
 
     /**
