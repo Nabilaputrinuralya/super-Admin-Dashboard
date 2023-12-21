@@ -30,9 +30,9 @@ use App\Http\Controllers\ProjectManagementController;
 |
 */
 
-// Route::get('/regis', function () {
-//     return view('welcome');
-// });
+Route::get('/regis', function () {
+    return view('welcome');
+});
 
 
 Route::get('/login-page', function () {
