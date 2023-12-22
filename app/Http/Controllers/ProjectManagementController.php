@@ -79,8 +79,8 @@ class ProjectManagementController extends Controller
 
         if ($new_project) {
             // clone dashboard
-            $sourceFolder = 'C:\our project\template';
-            $destination = 'C:\our project';
+            $sourceFolder = 'F:\project-laravel\Dashboard\template';
+            $destination = 'F:\project-laravel\Dashboard';
             $name = $request->input('projectname');
             $destinationFolder = $destination . '/' . $name;
 

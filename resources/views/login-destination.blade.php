@@ -26,6 +26,7 @@
                                           </button>
                                           <div class="dropdown-menu" aria-labelledby="emailDropdown">
                                             <!-- Add your email options here -->
+                                            <a class="dropdown-item dropdowntext" href="{{ route('login') }}">Superadmin Proking</a>
                                             @foreach($dataPortalLogin as $item)
                                             <a class="dropdown-item dropdowntext" href="{{ $item->projectlink }}">{{ $item->projectname }}</a>
                                             @endforeach

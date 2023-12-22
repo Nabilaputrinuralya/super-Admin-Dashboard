@@ -13,9 +13,9 @@ class PortalLoginSeeder extends Seeder
      */
     public function run(): void
     {
-        PortalLogin::create([
-            'projectname' => 'Project Name 1',
-            'projectlink' => 'http://127.0.0.1:8000/login',
-        ]);
+        // PortalLogin::create([
+        //     'projectname' => 'Project Name 1',
+        //     'projectlink' => 'http://127.0.0.1:8000/login',
+        // ]);
     }
 }

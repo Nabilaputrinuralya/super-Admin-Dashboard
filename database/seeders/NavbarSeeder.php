@@ -15,9 +15,14 @@ class NavbarSeeder extends Seeder
     public function run()
     {
         // Data seed untuk model Navbar
-        Navbar::create([
-            'websitelogo' => 'Website_Logo.png', // Ganti dengan nama file logo default yang sebenarnya
-        ]);
+        if (Navbar::count() === 0) {
+            Navbar::create([
+                'websitelogo' => 'Website_Logo.png', // Ganti dengan nama file logo default yang sebenarnya
+            ]);
+            $this->command->info('Successfully seeding.');
+        } else {
+            $this->command->info('Navbar table is not empty. Skipping seeding');
+        }
 
         // Anda dapat menambahkan lebih banyak data seed jika diperlukan
 

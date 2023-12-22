@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'email' => 'nabilaputri@gmail.com',
                 'role' => 1,
                 'phone' => '082115450690',
-                'picture' => 'Default_Image.png',
+                'picture' => 'no-image.jpg',
                 'password'=>Hash::make('superadmin123_'),
                 ]);
             $this->command->info('Successfully seeding.');
